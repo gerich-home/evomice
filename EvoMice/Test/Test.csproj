@@ -32,18 +32,22 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data.DataSetExtensions">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EvoMice.Neuro\EvoMice.Neuro.csproj">
+      <Project>{BA94C87B-EB0C-4AA2-AA7F-56E4D92F0AD2}</Project>
+      <Name>EvoMice.Neuro</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EvoMice\EvoMice.csproj">
+      <Project>{5AE8B462-F31A-44FE-8182-CE869BA45376}</Project>
+      <Name>EvoMice</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

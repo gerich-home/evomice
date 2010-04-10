@@ -1,0 +1,79 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace EvoMice.Neuro.Neurons
+{
+    /// <summary>
+    /// Общая функциональность нейронов
+    /// </summary>
+    public abstract class BaseNeuron : INeuron
+    {
+        /// <summary>
+        /// Начальное возбужение нейрона
+        /// </summary>
+        protected double bias;
+
+        /// <summary>
+        /// Минимальное принимаемое значение
+        /// </summary>
+        protected double lowBound;
+
+        /// <summary>
+        /// Максимальное принимаемое значение
+        /// </summary>
+        protected double highBound;
+
+        /// <summary>
+        /// Суммарный вход нейрона
+        /// </summary>
+        protected double summaryInput;
+
+        /// <summary>
+        /// Возбужение нейрона
+        /// </summary>
+        protected double activation;
+
+        /// <summary>
+        /// Нейрон с начальным возбужением с ограниченным возбужением
+        /// </summary>
+        /// <param name="bias">Начальное возбужение нейрона</param>
+        /// <param name="lowBound">Минимальное принимаемое значение</param>
+        /// <param name="highBound">Максимальное принимаемое значение</param>
+        public BaseNeuron(double bias, double lowBound, double highBound)
+        {
+            this.bias = bias;
+            this.lowBound = lowBound;
+            this.highBound = highBound;
+        }
+
+        /// <summary>
+        /// Вычислить возбуждение нейрона на основе суммарного входа
+        /// </summary>
+        /// <returns>Возбуждение нейрона</returns>
+        protected abstract double CalculateActivation();
+
+        #region INeuron Members
+
+        void INeuron.AddSignal(double weight)
+        {
+            summaryInput += weight;
+        }
+
+        void INeuron.Update()
+        {
+            activation = Math.Min(highBound, Math.Max(lowBound, CalculateActivation()));
+            summaryInput = 0;
+        }
+
+        /// <summary>
+        /// Возбуждение нейрона
+        /// </summary>
+        public double Activation
+        {
+            get { return activation; }
+        }
+
+        #endregion
+    }
+}

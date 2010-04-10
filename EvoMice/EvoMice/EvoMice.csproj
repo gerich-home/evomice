@@ -36,7 +36,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Neuro\Network.cs" />
+    <Compile Include="Neuro\Neurons\BaseNeuron.cs" />
+    <Compile Include="Neuro\Neurons\ClampedNeuron.cs" />
+    <Compile Include="Neuro\Neurons\LinearNeuron.cs" />
+    <Compile Include="Neuro\Neurons\SigmoidalNeuron.cs" />
+    <Compile Include="Neuro\Synapses\BaseSynapse.cs" />
+    <Compile Include="Neuro\Synapses\ClampedSynapse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EvoMice.Genetic\EvoMice.Genetic.csproj">
+      <Project>{B5E20441-594A-424F-BB34-340288537559}</Project>
+      <Name>EvoMice.Genetic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EvoMice.Neuro\EvoMice.Neuro.csproj">
+      <Project>{BA94C87B-EB0C-4AA2-AA7F-56E4D92F0AD2}</Project>
+      <Name>EvoMice.Neuro</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EvoMice.World\EvoMice.World.csproj">
+      <Project>{2BE1B90F-DD5F-4BC2-894A-B249DB816790}</Project>
+      <Name>EvoMice.World</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
