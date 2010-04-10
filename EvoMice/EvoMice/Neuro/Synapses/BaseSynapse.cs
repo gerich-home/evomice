@@ -48,13 +48,21 @@ namespace EvoMice.Neuro.Synapses
         /// Вычислить сигнал синапса
         /// </summary>
         /// <returns>Сигнал синапса</returns>
-        protected abstract double CalculateSignal();
+        protected virtual double CalculateSignal()
+        {
+            return 0;
+        }
+
+        protected virtual void Update()
+        {
+            inNeuron.AddSignal(Math.Min(highBound, Math.Max(lowBound, CalculateSignal())));
+        }
 
         #region ISynapse Members
 
         void ISynapse.Update()
         {
-            inNeuron.AddSignal(Math.Min(highBound, Math.Max(lowBound, CalculateSignal())));
+            Update();
         }
 
         #endregion

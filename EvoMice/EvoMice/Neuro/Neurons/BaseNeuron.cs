@@ -51,19 +51,32 @@ namespace EvoMice.Neuro.Neurons
         /// Вычислить возбуждение нейрона на основе суммарного входа
         /// </summary>
         /// <returns>Возбуждение нейрона</returns>
-        protected abstract double CalculateActivation();
+        protected virtual double CalculateActivation()
+        {
+            return 0;
+        }
+
+        protected virtual void AddSignal(double weight)
+        {
+            summaryInput += weight;
+        }
+
+        protected virtual void Update()
+        {
+            activation = Math.Min(highBound, Math.Max(lowBound, CalculateActivation()));
+            summaryInput = 0;
+        }
 
         #region INeuron Members
 
         void INeuron.AddSignal(double weight)
         {
-            summaryInput += weight;
+            AddSignal(weight);
         }
 
         void INeuron.Update()
         {
-            activation = Math.Min(highBound, Math.Max(lowBound, CalculateActivation()));
-            summaryInput = 0;
+            Update();
         }
 
         /// <summary>

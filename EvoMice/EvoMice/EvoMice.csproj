@@ -43,6 +43,7 @@
     <Compile Include="Neuro\Neurons\SigmoidalNeuron.cs" />
     <Compile Include="Neuro\Synapses\BaseSynapse.cs" />
     <Compile Include="Neuro\Synapses\ClampedSynapse.cs" />
+    <Compile Include="Neuro\Synapses\HebbianSynapse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
