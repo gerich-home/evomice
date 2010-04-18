@@ -1,0 +1,23 @@
+﻿Реализовать:
+Масштабирование в пропорциональной селекции
+
+Добавить:
+EvoMice.Genetic.Breeding.PositiveAssociativeMating
+EvoMice.Genetic.Breeding.NegativeAssociativeMating
+EvoMice.Genetic.Breeding.SelectingBreeding
+
+EvoMice.Genetic.Selection.LinearRangeSelection
+EvoMice.Genetic.Selection.NonLinearRangeSelection
+EvoMice.Genetic.Selection.BoltzmannSelection
+EvoMice.Genetic.Selection.PowerLawSelection
+
+EvoMice.Genetic.VectorChromosome.Mutation.Inversion
+EvoMice.Genetic.VectorChromosome.Mutation.Translocation
+
+EvoMice.Genetic.VectorChromosome.Crossover.DoblePointCrossover
+EvoMice.Genetic.VectorChromosome.Crossover.RestrictedDoblePointCrossover
+EvoMice.Genetic.VectorChromosome.Crossover.MultiPointCrossover
+
+EvoMice.Genetic.VectorChromosome.Continuous.Crossover.BLXCrossover
+EvoMice.Genetic.VectorChromosome.Continuous.Crossover.FlatCrossover
+EvoMice.Genetic.VectorChromosome.Continuous.Crossover.LinearCrossover
