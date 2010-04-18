@@ -7,16 +7,18 @@ namespace EvoMice.Neuro
     /// <summary>
     /// Нейронная сеть
     /// </summary>
-    public interface INetwork
+    public interface INetwork<TNeuron, TSynapse>
+        where TNeuron : INeuron
+        where TSynapse : ISynapse
     {
         /// <summary>
         /// Список нейронов
         /// </summary>
-        IList<INeuron> Neurons { get; }
+        IList<TNeuron> Neurons { get; }
         /// <summary>
         /// Список синапсов
         /// </summary>
-        IList<ISynapse> Synapses { get; }
+        IList<TSynapse> Synapses { get; }
 
         void Update();
     }

@@ -4,30 +4,32 @@ using System.Text;
 
 namespace EvoMice.Neuro
 {
-    public class Network : INetwork
+    public class Network<TNeuron, TSynapse> : INetwork<TNeuron, TSynapse>
+        where TNeuron : INeuron
+        where TSynapse : ISynapse
     {
-        List<INeuron> neurons;
-        List<ISynapse> synapses;
+        protected List<TNeuron> neurons;
+        protected List<TSynapse> synapses;
 
         public Network()
         {
-            neurons = new List<INeuron>();
-            synapses = new List<ISynapse>();
+            neurons = new List<TNeuron>();
+            synapses = new List<TSynapse>();
         }
 
-        #region INetwork Members
+        #region INetwork<TNeuron,TSynapse> Members
 
-        public IList<INeuron> Neurons
+        public IList<TNeuron> Neurons
         {
             get { return neurons; }
         }
 
-        public IList<ISynapse> Synapses
+        public IList<TSynapse> Synapses
         {
             get { return synapses; }
         }
 
-        void INetwork.Update()
+        void INetwork<TNeuron, TSynapse>.Update()
         {
             foreach (ISynapse synapse in synapses)
                 synapse.Update();

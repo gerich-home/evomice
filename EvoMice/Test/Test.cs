@@ -27,26 +27,26 @@ namespace EvoMice
 
         static bool testNeuroStruct()
         {
-            INetwork network = new Network();
+            INetwork<LinearNeuron, ClampedSynapse> network = new Network<LinearNeuron, ClampedSynapse>();
 
-            INeuron n1 = new LinearNeuron(1),
-                    n2 = new LinearNeuron(1),
-                    n3 = new LinearNeuron(1);
+            LinearNeuron n1 = new LinearNeuron(1),
+                         n2 = new LinearNeuron(1),
+                         n3 = new LinearNeuron(1);
 
-            IList<INeuron> neurons = network.Neurons;
+            IList<LinearNeuron> neurons = network.Neurons;
             neurons.Add(n1);
             neurons.Add(n2);
             neurons.Add(n3);
 
-            IList<ISynapse> synapses = network.Synapses;
-            ISynapse s1 = new ClampedSynapse(n1, n2, 1),
-                     s2 = new ClampedSynapse(n2, n3, 1),
-                     s3 = new ClampedSynapse(n3, n1, 2);
+            IList<ClampedSynapse> synapses = network.Synapses;
+            ClampedSynapse s1 = new ClampedSynapse(n1, n2, 1),
+                           s2 = new ClampedSynapse(n2, n3, 1),
+                           s3 = new ClampedSynapse(n3, n1, 2);
             synapses.Add(s1);
             synapses.Add(s2);
             synapses.Add(s3);
 
-            n1.AddSignal(1);
+            (n1 as INeuron).AddSignal(1);
 
             network.Update(); if (n1.Activation != 1 || n2.Activation != 0 || n3.Activation != 0) return false;
             network.Update(); if (n1.Activation != 0 || n2.Activation != 1 || n3.Activation != 0) return false;
@@ -60,6 +60,13 @@ namespace EvoMice
             return true;
         }
 
+        static bool testGeneticClasses()
+        {
+
+
+            return true;
+        }
+
         static void TestNeuro()
         {
             Console.WriteLine("\tТестируем EvoMice.Neuro");
@@ -68,9 +75,18 @@ namespace EvoMice
 
         }
 
+        static void TestGenetic()
+        {
+            Console.WriteLine("\tТестируем EvoMice.Genetic");
+
+            RunTest(new TestDelegate(testGeneticClasses), "Классы генетического алгоритма");
+
+        }
+
         public static void RunTests()
         {
             TestNeuro();
+            TestGenetic();
         }
     }
 }

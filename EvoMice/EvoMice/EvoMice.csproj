@@ -32,18 +32,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Neuro\Network.cs" />
-    <Compile Include="Neuro\Neurons\BaseNeuron.cs" />
-    <Compile Include="Neuro\Neurons\ClampedNeuron.cs" />
-    <Compile Include="Neuro\Neurons\LinearNeuron.cs" />
-    <Compile Include="Neuro\Neurons\SigmoidalNeuron.cs" />
-    <Compile Include="Neuro\Synapses\BaseSynapse.cs" />
-    <Compile Include="Neuro\Synapses\ClampedSynapse.cs" />
-    <Compile Include="Neuro\Synapses\HebbianSynapse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -59,6 +49,9 @@
       <Project>{2BE1B90F-DD5F-4BC2-894A-B249DB816790}</Project>
       <Name>EvoMice.World</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Ideas.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
