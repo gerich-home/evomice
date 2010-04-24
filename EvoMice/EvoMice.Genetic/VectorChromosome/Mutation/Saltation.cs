@@ -17,7 +17,7 @@ namespace EvoMice.Genetic.VectorChromosome.Mutation
         /// <summary>
         /// Число изменяемых локусов
         /// </summary>
-        protected int count;
+        public int Count { get; protected set; }
 
         /// <summary>
         /// Сальтация
@@ -27,16 +27,7 @@ namespace EvoMice.Genetic.VectorChromosome.Mutation
         public Saltation(double probability, int count)
             : base(probability)
         {
-            this.count = count;
-        }
-
-        /// <summary>
-        /// Число изменяемых локусов
-        /// </summary>
-        public int Count
-        {
-            get { return count; }
-            set { count = value; }
+            Count = count;
         }
 
         /// <summary>
@@ -53,7 +44,7 @@ namespace EvoMice.Genetic.VectorChromosome.Mutation
                 remained[i] = i;
 
             int mutationPosition;
-            for (int i = 0; i < count; i++)
+            for (int i = 0; i < Count; i++)
             {
                 mutationPosition = Util.Random.Next(chromosome.Length - i);
                 mutant[remained[mutationPosition]] = mutant[remained[mutationPosition]].Mutate();

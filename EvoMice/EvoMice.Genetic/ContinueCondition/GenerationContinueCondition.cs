@@ -16,7 +16,7 @@ namespace EvoMice.Genetic.ContinueCondition
         /// <summary>
         /// Максимальное число поколений
         /// </summary>
-        protected int maxGenerations;
+        public int MaxGenerations { get; protected set; }
 
         /// <summary>
         /// Условие продолжения генетического алгоритма, основанное на числе поколений
@@ -24,14 +24,14 @@ namespace EvoMice.Genetic.ContinueCondition
         /// <param name="maxGenerations">Максимальное число поколений</param>
         public GenerationContinueCondition(int maxGenerations)
         {
-            this.maxGenerations = maxGenerations;
+            MaxGenerations = maxGenerations;
         }
 
         #region IContinueCondition<TChromosome,TIndividual> Members
 
         bool IContinueCondition<TChromosome, TIndividual>.ShouldContinue(IList<TIndividual> population, int generation)
         {
-            return generation < maxGenerations;
+            return generation < MaxGenerations;
         }
 
         #endregion

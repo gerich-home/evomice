@@ -13,22 +13,22 @@ namespace EvoMice.Genetic.VectorChromosome.Continuous
         /// <summary>
         /// Размер популяции
         /// </summary>
-        protected int populationSize;
+        public int PopulationSize { get; protected set; }
 
         /// <summary>
         /// Длина хромосомы индивидов
         /// </summary>
-        protected int chromosomeLength;
+        public int ChromosomeLength { get; protected set; }
 
         /// <summary>
         /// Нижние допустимые значения локусов
         /// </summary>
-        protected double[] lowBounds;
+        protected double[] LowBounds { get; set; }
 
         /// <summary>
         /// Верхние допустимые значения локусов
         /// </summary>
-        protected double[] highBounds;
+        protected double[] HighBounds { get; set; }
 
         /// <summary>
         /// Инициализатор первого поколения из непрерывных хромосом
@@ -37,18 +37,22 @@ namespace EvoMice.Genetic.VectorChromosome.Continuous
         /// <param name="chromosomeLength">Длина хромосомы индивидов</param>
         /// <param name="lowBound">Нижнее допустимое значение локусов</param>
         /// <param name="highBound">Верхнее допустимое значение локусов</param>
-        public ContinuousPopulationInitializer(int populationSize, int chromosomeLength, double lowBound, double highBound)
+        public ContinuousPopulationInitializer(
+            int populationSize,
+            int chromosomeLength, 
+            double lowBound, 
+            double highBound)
         {
-            this.populationSize = populationSize;
-            this.chromosomeLength = chromosomeLength;
+            PopulationSize = populationSize;
+            ChromosomeLength = chromosomeLength;
 
-            lowBounds = new double[chromosomeLength];
-            highBounds = new double[chromosomeLength];
+            LowBounds = new double[chromosomeLength];
+            HighBounds = new double[chromosomeLength];
 
             for (int i = 0; i < chromosomeLength; i++)
             {
-                lowBounds[i] = lowBound;
-                highBounds[i] = highBound;
+                LowBounds[i] = lowBound;
+                HighBounds[i] = highBound;
             }
         }
 
@@ -59,47 +63,30 @@ namespace EvoMice.Genetic.VectorChromosome.Continuous
         /// <param name="chromosomeLength">Длина хромосомы индивидов</param>
         /// <param name="lowBounds">Нижние допустимые значения локусов</param>
         /// <param name="highBounds">Верхние допустимые значения локусов</param>
-        public ContinuousPopulationInitializer(int populationSize, int chromosomeLength, double[] lowBounds, double[] highBounds)
+        public ContinuousPopulationInitializer(
+            int populationSize,
+            int chromosomeLength,
+            double[] lowBounds,
+            double[] highBounds)
         {
-            this.populationSize = populationSize;
-            this.chromosomeLength = chromosomeLength;
+            PopulationSize = populationSize;
+            ChromosomeLength = chromosomeLength;
 
-            this.lowBounds = new double[chromosomeLength];
-            this.highBounds = new double[chromosomeLength];
+            lowBounds = new double[ChromosomeLength];
+            highBounds = new double[ChromosomeLength];
 
-            for (int i = 0; i < chromosomeLength; i++)
-            {
-                this.lowBounds[i] = lowBounds[i];
-                this.highBounds[i] = highBounds[i];
-            }
-        }
-
-        /// <summary>
-        /// Размер популяции
-        /// </summary>
-        public int PopulationSize
-        {
-            get { return populationSize; }
-            set { populationSize = value; }
-        }
-
-        /// <summary>
-        /// Длина хромосомы индивидов
-        /// </summary>
-        public int ChromosomeLength
-        {
-            get { return chromosomeLength; }
-            set { chromosomeLength = value; }
+            lowBounds.CopyTo(LowBounds, 0);
+            highBounds.CopyTo(HighBounds, 0);
         }
 
         #region IPopulationInitializer<ContinuousChromosome> Members
 
         IList<ContinuousChromosome> IPopulationInitializer<ContinuousChromosome>.Initialize()
         {
-            List<ContinuousChromosome> population = new List<ContinuousChromosome>(populationSize);
+            List<ContinuousChromosome> population = new List<ContinuousChromosome>(PopulationSize);
 
-            for (int i = 0; i < populationSize; i++)
-                population.Add(new ContinuousChromosome(chromosomeLength, lowBounds, highBounds));
+            for (int i = 0; i < PopulationSize; i++)
+                population.Add(new ContinuousChromosome(ChromosomeLength, LowBounds, HighBounds));
 
             return population;
         }

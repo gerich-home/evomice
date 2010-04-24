@@ -18,7 +18,8 @@ namespace EvoMice.Genetic.VectorChromosome.Continuous.Crossover
         /// <summary>
         /// Величина разброса значений
         /// </summary>
-        protected double alpha;
+        public double Alpha { get; protected set; }
+
         /// <summary>
         /// BLX кроссовер с параметром alpha
         /// </summary>
@@ -27,7 +28,7 @@ namespace EvoMice.Genetic.VectorChromosome.Continuous.Crossover
         public BLXCrossover(double probability, double alpha)
             : base(probability)
         {
-            this.alpha = alpha;
+            Alpha = alpha;
         }
 
         /// <summary>
@@ -43,12 +44,12 @@ namespace EvoMice.Genetic.VectorChromosome.Continuous.Crossover
             int point = Util.Random.Next(motherChromosome.Length - 1);
             ContinuousChromosome child = motherChromosome.Copy();
 
-            double c = 1 + 2 * alpha;
+            double c = 1 + 2 * Alpha;
             for (int i = 0; i < child.Length; i++)
             {
                 double min = Math.Min(motherChromosome[i].Value, fatherChromosome[i].Value);
                 double max = Math.Max(motherChromosome[i].Value, fatherChromosome[i].Value);
-                child[i].Value=min + (max - min) * (Util.Random.NextDouble() * c - alpha);
+                child[i].Value=min + (max - min) * (Util.Random.NextDouble() * c - Alpha);
             }
 
             List<ContinuousChromosome> result = new List<ContinuousChromosome>(1);

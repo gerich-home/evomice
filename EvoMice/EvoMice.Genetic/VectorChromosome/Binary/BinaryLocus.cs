@@ -15,7 +15,7 @@ namespace EvoMice.Genetic.VectorChromosome.Binary
         /// <summary>
         /// Значение локуса
         /// </summary>
-        protected int value;
+        public int Value { get; set; }
 
         /// <summary>
         /// Бинарный локус
@@ -23,7 +23,7 @@ namespace EvoMice.Genetic.VectorChromosome.Binary
         /// <remarks>Заполнен случайным значением</remarks>
         public BinaryLocus()
         {
-            value = Util.Random.Next(2);
+            Value = Util.Random.Next(2);
         }
 
         /// <summary>
@@ -33,18 +33,9 @@ namespace EvoMice.Genetic.VectorChromosome.Binary
         public BinaryLocus(int value)
         {
             if (value == 0)
-                this.value = 0;
+                Value = 0;
             else
-                this.value = 1;
-        }
-
-        /// <summary>
-        /// Значение локуса
-        /// </summary>
-        public int Value
-        {
-            get { return value; }
-            set { this.value = value; }
+                Value = 1;
         }
 
         #region ICopyable<BinaryLocus> Members
@@ -55,7 +46,7 @@ namespace EvoMice.Genetic.VectorChromosome.Binary
         /// <returns>Копия объекта</returns>
         public BinaryLocus Copy()
         {
-            return new BinaryLocus(this.value);
+            return new BinaryLocus(this.Value);
         }
 
         #endregion
@@ -68,7 +59,7 @@ namespace EvoMice.Genetic.VectorChromosome.Binary
         /// <returns>Мутант объекта</returns>
         public BinaryLocus Mutate()
         {
-            return new BinaryLocus(1 - value);
+            return new BinaryLocus(1 - Value);
         }
 
         #endregion
@@ -82,7 +73,7 @@ namespace EvoMice.Genetic.VectorChromosome.Binary
         /// <returns>true, если равны</returns>
         public bool EqualsTo(BinaryLocus otherObject)
         {
-            return otherObject.value == value;
+            return otherObject.Value == Value;
         }
 
         #endregion

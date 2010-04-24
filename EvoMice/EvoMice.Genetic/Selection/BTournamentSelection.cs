@@ -16,7 +16,7 @@ namespace EvoMice.Genetic.Selection
         /// <summary>
         /// Численность конкурирующей группы
         /// </summary>
-        protected int betta;
+        public int Betta { get; protected set; }
 
         /// <summary>
         /// Бетта-турнирная селекция
@@ -24,16 +24,7 @@ namespace EvoMice.Genetic.Selection
         /// <param name="betta">Численность конкурирующей группы</param>
         public BTournamentSelection(int betta)
         {
-            this.betta = betta;
-        }
-
-        /// <summary>
-        /// Численность конкурирующей группы
-        /// </summary>
-        public int Betta
-        {
-            get { return betta; }
-            set { betta = value; }
+            Betta = betta;
         }
 
         #region ISelection<TChromosome,TIndividual> Members
@@ -51,7 +42,7 @@ namespace EvoMice.Genetic.Selection
             {
                 best = reproductionGroup[Util.Random.Next(rCount)];
 
-                for (int j = 1; j < betta; j++)
+                for (int j = 1; j < Betta; j++)
                 {
                     current = reproductionGroup[Util.Random.Next(rCount)];
                     if (current.Fitness > best.Fitness)

@@ -11,15 +11,6 @@ namespace EvoMice.Genetic
     public class ParentsPair<TChromosome, TIndividual> : IParentsPair<TChromosome, TIndividual>
         where TIndividual : IIndividual<TChromosome>
     {
-        /// <summary>
-        /// 1-ая особь родительской пары
-        /// </summary>
-        protected TIndividual mother;
-
-        /// <summary>
-        /// 2-ая особь родительской пары
-        /// </summary>
-        protected TIndividual father;
 
         /// <summary>
         /// Родительская пара
@@ -28,21 +19,21 @@ namespace EvoMice.Genetic
         /// <param name="father">2-ая особь родительской пары</param>
         public ParentsPair(TIndividual mother, TIndividual father)
         {
-            this.mother = mother;
-            this.father = father;
+            Mother = mother;
+            Father = father;
         }
 
         #region IParentsPair<TChromosome, TIndividual> Members
 
-        public TIndividual Mother
-        {
-            get { return mother; }
-        }
+        /// <summary>
+        /// 1-ая особь родительской пары
+        /// </summary>
+        public TIndividual Mother { get; protected set; }
 
-        public TIndividual Father
-        {
-            get { return father; }
-        }
+        /// <summary>
+        /// 2-ая особь родительской пары
+        /// </summary>
+        public TIndividual Father { get; protected set; }
 
         #endregion
     }

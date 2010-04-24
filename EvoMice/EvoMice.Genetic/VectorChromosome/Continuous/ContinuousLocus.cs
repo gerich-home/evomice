@@ -15,17 +15,17 @@ namespace EvoMice.Genetic.VectorChromosome.Continuous
         /// <summary>
         /// Значение локуса
         /// </summary>
-        protected double value;
+        public double Value { get; set; }
 
         /// <summary>
         /// Нижнее допустимое значение
         /// </summary>
-        protected double lowBound;
+        public double LowBound { get; protected set; }
 
         /// <summary>
         /// Верхнее допустимое значение
         /// </summary>
-        protected double highBound;
+        public double HighBound { get; protected set; }
 
         /// <summary>
         /// Непрерывный локус
@@ -35,9 +35,9 @@ namespace EvoMice.Genetic.VectorChromosome.Continuous
         /// <remarks>Заполнен случайным значением</remarks>
         public ContinuousLocus(double lowBound, double highBound)
         {
-            value = Util.Random.NextDouble() * (highBound - lowBound) + lowBound;
-            this.lowBound = lowBound;
-            this.highBound = highBound;
+            Value = Util.Random.NextDouble() * (highBound - lowBound) + lowBound;
+            LowBound = lowBound;
+            HighBound = highBound;
         }
 
         /// <summary>
@@ -48,34 +48,9 @@ namespace EvoMice.Genetic.VectorChromosome.Continuous
         /// <param name="value">Значение локуса</param>
         public ContinuousLocus(double lowBound, double highBound, double value)
         {
-            this.value = value;
-            this.lowBound = lowBound;
-            this.highBound = highBound;
-        }
-
-        /// <summary>
-        /// Значение локуса
-        /// </summary>
-        public double Value
-        {
-            get { return value; }
-            set { this.value=value; }
-        }
-
-        /// <summary>
-        /// Нижнее допустимое значение
-        /// </summary>
-        public double LowBound
-        {
-            get { return lowBound; }
-        }
-
-        /// <summary>
-        /// Верхнее допустимое значение
-        /// </summary>
-        public double HighBound
-        {
-            get { return highBound; }
+            Value = value;
+            LowBound = lowBound;
+            HighBound = highBound;
         }
 
         #region ICopyable<ContinuousLocus> Members
@@ -86,7 +61,7 @@ namespace EvoMice.Genetic.VectorChromosome.Continuous
         /// <returns>Копия объекта</returns>
         public ContinuousLocus Copy()
         {
-            return new ContinuousLocus(lowBound, highBound, value);
+            return new ContinuousLocus(LowBound, HighBound, Value);
         }
 
         #endregion
@@ -99,7 +74,7 @@ namespace EvoMice.Genetic.VectorChromosome.Continuous
         /// <returns>Мутант объекта</returns>
         public ContinuousLocus Mutate()
         {
-            return new ContinuousLocus(lowBound, highBound);
+            return new ContinuousLocus(LowBound, HighBound);
         }
 
         #endregion
@@ -113,7 +88,7 @@ namespace EvoMice.Genetic.VectorChromosome.Continuous
         /// <returns>true, если равны</returns>
         public bool EqualsTo(ContinuousLocus otherObject)
         {
-            return otherObject.value == value;
+            return otherObject.Value == Value;
         }
 
         #endregion

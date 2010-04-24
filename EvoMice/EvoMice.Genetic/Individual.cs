@@ -11,29 +11,21 @@ namespace EvoMice.Genetic
     public class Individual<TChromosome> : IIndividual<TChromosome>
     {
         /// <summary>
-        /// Значение приспособленности
-        /// </summary>
-        protected double fitness;
-
-        /// <summary>
         /// Функция приспособленности
         /// </summary>
-        protected IFitnessFunction<TChromosome> fitnessFunction;
-
-        /// <summary>
-        /// Особь
-        /// </summary>
-        protected TChromosome chromosome;
+        public IFitnessFunction<TChromosome> FitnessFunction { get; protected set; }
 
         /// <summary>
         /// Оцененная особь генетического алгоритма
         /// </summary>
         /// <param name="individual">Неоцененная особь</param>
         /// <remarks>Оценивает особь, создавая новый объект Individual</remarks>
-        public Individual(TChromosome chromosome, IFitnessFunction<TChromosome> fitnessFunction)
+        public Individual(
+            TChromosome chromosome,
+            IFitnessFunction<TChromosome> fitnessFunction)
         {
-            this.chromosome = chromosome;
-            this.fitnessFunction = fitnessFunction;
+            Chromosome = chromosome;
+            FitnessFunction = fitnessFunction;
             RecalculateFitness();
         }
 
@@ -42,25 +34,19 @@ namespace EvoMice.Genetic
         /// <summary>
         /// Значение приспособленности
         /// </summary>
-        public double Fitness
-        {
-            get { return fitness; }
-        }
+        public double Fitness { get; protected set; }
 
         /// <summary>
         /// Хромосома особи
         /// </summary>
-        public TChromosome Chromosome
-        {
-            get { return chromosome; }
-        }
+        public TChromosome Chromosome { get; protected set; }
 
         /// <summary>
         /// Пересчитывает значение приспособленности особи
         /// </summary>
         public void RecalculateFitness()
         {
-            fitness = fitnessFunction.Calculate(chromosome);
+            Fitness = FitnessFunction.Calculate(Chromosome);
         }
 
         #endregion

@@ -16,7 +16,7 @@ namespace EvoMice.Genetic.Selection
         /// <summary>
         /// Математичкое ожидание числа копий самой приспособленной особи
         /// </summary>
-        protected double c = 2;
+        public double c{ get; protected set; }
 
         /// <summary>
         /// Отбор методом рулетки

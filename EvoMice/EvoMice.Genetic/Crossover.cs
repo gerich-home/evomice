@@ -18,7 +18,7 @@ namespace EvoMice.Genetic
         /// <summary>
         /// Вероятность кроссовера
         /// </summary>
-        protected double probability;
+        public double Probability { get; protected set; }
 
         /// <summary>
         /// Вероятностный кроссовер
@@ -26,16 +26,7 @@ namespace EvoMice.Genetic
         /// <param name="probability">Вероятность кроссовера</param>
         public Crossover(double probability)
         {
-            this.probability = probability;
-        }
-
-        /// <summary>
-        /// Вероятность кроссовера
-        /// </summary>
-        public double Probability
-        {
-            get { return probability; }
-            set { probability = value; }
+            Probability = probability;
         }
 
         /// <summary>
@@ -50,7 +41,7 @@ namespace EvoMice.Genetic
 
         IList<TChromosome> ICrossover<TChromosome, TIndividual, TParentsPair>.Crossover(TParentsPair parentsPair)
         {
-            if (Util.Random.NextDouble() <= probability)
+            if (Util.Random.NextDouble() <= Probability)
                 return DoCrossover(parentsPair);
             else
                 return new List<TChromosome>();

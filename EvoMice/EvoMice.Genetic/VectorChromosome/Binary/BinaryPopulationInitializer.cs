@@ -13,12 +13,12 @@ namespace EvoMice.Genetic.VectorChromosome.Binary
         /// <summary>
         /// Размер популяции
         /// </summary>
-        protected int populationSize;
+        public int PopulationSize { get; protected set; }
 
         /// <summary>
         /// Длина хромосомы индивидов
         /// </summary>
-        protected int chromosomeLength;
+        public int ChromosomeLength { get; protected set; }
 
         /// <summary>
         /// Инициализатор первого поколения из бинарных хромосом
@@ -27,36 +27,18 @@ namespace EvoMice.Genetic.VectorChromosome.Binary
         /// <param name="chromosomeLength">Длина хромосомы индивидов</param>
         public BinaryPopulationInitializer(int populationSize, int chromosomeLength)
         {
-            this.populationSize = populationSize;
-            this.chromosomeLength = chromosomeLength;
-        }
-
-        /// <summary>
-        /// Размер популяции
-        /// </summary>
-        public int PopulationSize
-        {
-            get { return populationSize; }
-            set { populationSize = value; }
-        }
-
-        /// <summary>
-        /// Длина хромосомы индивидов
-        /// </summary>
-        public int ChromosomeLength
-        {
-            get { return chromosomeLength; }
-            set { chromosomeLength = value; }
+            PopulationSize = populationSize;
+            ChromosomeLength = chromosomeLength;
         }
 
         #region IPopulationInitializer<BinaryChromosome> Members
 
         IList<BinaryChromosome> IPopulationInitializer<BinaryChromosome>.Initialize()
         {
-            List<BinaryChromosome> population = new List<BinaryChromosome>(populationSize);
+            List<BinaryChromosome> population = new List<BinaryChromosome>(PopulationSize);
 
-            for (int i = 0; i < populationSize; i++)
-                population.Add(new BinaryChromosome(chromosomeLength));
+            for (int i = 0; i < PopulationSize; i++)
+                population.Add(new BinaryChromosome(ChromosomeLength));
 
             return population;
         }

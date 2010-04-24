@@ -20,17 +20,17 @@ namespace EvoMice.Genetic.Breeding
         /// <summary>
         /// Максимальная разница между приспособленностями скрещиваемых особей
         /// </summary>
-        protected double maxDelta;
+        public double MaxDelta { get; protected set; }
 
         /// <summary>
         /// Число создаваемых пар
         /// </summary>
-        protected int pairCount;
+        public int PairCount { get; protected set; }
 
         /// <summary>
         /// Создатель родительской пары
         /// </summary>
-        protected TParentsPairFactory parentsPairFactory;
+        public TParentsPairFactory ParentsPairFactory { get; protected set; }
 
         /// <summary>
         /// Позитивное ассоциативное скрещивание
@@ -38,29 +38,14 @@ namespace EvoMice.Genetic.Breeding
         /// <param name="parentsPairFactory">Создатель родительской пары</param>
         /// <param name="maxDelta">Максимальная разница между приспособленностями скрещиваемых особей</param>
         /// <param name="pairCount">Число создаваемых пар</param>
-        public PositiveAssociativeMating(TParentsPairFactory parentsPairFactory, double maxDelta, int pairCount)
+        public PositiveAssociativeMating(
+            TParentsPairFactory parentsPairFactory,
+            double maxDelta,
+            int pairCount)
         {
-            this.maxDelta = maxDelta;
-            this.pairCount = pairCount;
-            this.parentsPairFactory = parentsPairFactory;
-        }
-
-        /// <summary>
-        /// Максимальная разница между приспособленностями скрещиваемых особей
-        /// </summary>
-        public double MaxDelta
-        {
-            get { return maxDelta; }
-            set { maxDelta = value; }
-        }
-
-        /// <summary>
-        /// Число создаваемых пар
-        /// </summary>
-        public int PairCount
-        {
-            get { return pairCount; }
-            set { pairCount = value; }
+            MaxDelta = maxDelta;
+            PairCount = pairCount;
+            ParentsPairFactory = parentsPairFactory;
         }
 
         #region IBreeding<TChromosome,TIndividual,TParentsPair> Members
@@ -74,22 +59,22 @@ namespace EvoMice.Genetic.Breeding
 
             int pCount = population.Count;
             List<TParentsPair> pairs =
-                new List<TParentsPair>(pairCount);
+                new List<TParentsPair>(PairCount);
 
             int minInd;
             int maxInd;
 
-            for (int i = 0; i < pairCount; i++)
+            for (int i = 0; i < PairCount; i++)
             {
                 int firstInd = Util.Random.Next(pCount);
                 TIndividual first = sortedPopulation[firstInd];
 
                 for (minInd = firstInd - 1; minInd >= 0; minInd--)
-                    if ((sortedPopulation[minInd].Fitness - first.Fitness) > maxDelta)
+                    if ((sortedPopulation[minInd].Fitness - first.Fitness) > MaxDelta)
                         break;
 
                 for (maxInd = firstInd + 1; maxInd < pCount; maxInd++)
-                    if ((first.Fitness - sortedPopulation[maxInd].Fitness) > maxDelta)
+                    if ((first.Fitness - sortedPopulation[maxInd].Fitness) > MaxDelta)
                         break;
 
                 if (maxInd - minInd == 2)
@@ -104,7 +89,7 @@ namespace EvoMice.Genetic.Breeding
 
                 TIndividual second = population[secondInd];
 
-                pairs.Add(parentsPairFactory.CreatePair(first, second));
+                pairs.Add(ParentsPairFactory.CreatePair(first, second));
             }
             return pairs;
         }

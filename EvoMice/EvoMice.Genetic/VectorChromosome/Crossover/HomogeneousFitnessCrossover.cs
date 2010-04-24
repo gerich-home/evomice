@@ -38,6 +38,8 @@ namespace EvoMice.Genetic.VectorChromosome.Crossover
 
             TChromosome child = motherChromosome.Copy();
 
+            // TODO: Поправить:
+            // Похоже алгоритм тупит при увеличении приспособленностей...
             double p = parentsPair.Father.Fitness / (parentsPair.Mother.Fitness + parentsPair.Father.Fitness);
 
             for (int i = 0; i < motherChromosome.Length; i++)

@@ -20,6 +20,8 @@ namespace EvoMice.Genetic
         /// <param name="chromosome">Хромосома индивида</param>
         /// <param name="fitnessFunction">Функция приспособленности для оценки индивида</param>
         /// <returns>Индивид</returns>
-        TIndividual CreateIndividual(TChromosome chromosome, TFitnessFunction fitnessFunction);
+        TIndividual CreateIndividual(
+            TChromosome chromosome, 
+            TFitnessFunction fitnessFunction);
     }
 }

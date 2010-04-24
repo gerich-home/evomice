@@ -14,7 +14,7 @@ namespace EvoMice.Genetic.VectorChromosome.Continuous
         /// <summary>
         /// Локусы хромосомы
         /// </summary>
-        ContinuousLocus[] locuses;
+        protected ContinuousLocus[] Locuses { get; set; }
 
         /// <summary>
         /// Хромосома с непрерывными значениями
@@ -24,9 +24,9 @@ namespace EvoMice.Genetic.VectorChromosome.Continuous
         /// <param name="highBound">Верхнее допустимое значение локусов</param>
         public ContinuousChromosome(int length, double lowBound, double highBound)
         {
-            locuses = new ContinuousLocus[length];
+            Locuses = new ContinuousLocus[length];
             for (int i = 0; i < length; i++)
-                locuses[i] = new ContinuousLocus(lowBound, highBound);
+                Locuses[i] = new ContinuousLocus(lowBound, highBound);
         }
 
         /// <summary>
@@ -37,9 +37,9 @@ namespace EvoMice.Genetic.VectorChromosome.Continuous
         /// <param name="highBounds">Верхние допустимые значения локусов</param>
         public ContinuousChromosome(int length, double[] lowBounds, double[] highBounds)
         {
-            locuses = new ContinuousLocus[length];
+            Locuses = new ContinuousLocus[length];
             for (int i = 0; i < length; i++)
-                locuses[i] = new ContinuousLocus(lowBounds[i], highBounds[i]);
+                Locuses[i] = new ContinuousLocus(lowBounds[i], highBounds[i]);
         }
 
         /// <summary>
@@ -48,9 +48,9 @@ namespace EvoMice.Genetic.VectorChromosome.Continuous
         /// <param name="original">Копируемая хромосома</param>
         public ContinuousChromosome(ContinuousChromosome original)
         {
-            locuses = new ContinuousLocus[original.Length];
+            Locuses = new ContinuousLocus[original.Length];
             for (int i = 0; i < original.Length; i++)
-                locuses[i] = original[i].Copy();
+                Locuses[i] = original[i].Copy();
         }
 
         #region IVectorChromosome<ContinuousLocus> Members
@@ -64,11 +64,11 @@ namespace EvoMice.Genetic.VectorChromosome.Continuous
         {
             get
             {
-                return locuses[index];
+                return Locuses[index];
             }
             set
             {
-                locuses[index] = value;
+                Locuses[index] = value;
             }
         }
 
@@ -77,7 +77,7 @@ namespace EvoMice.Genetic.VectorChromosome.Continuous
         /// </summary>
         public int Length
         {
-            get { return locuses.Length; }
+            get { return Locuses.Length; }
         }
 
         #endregion

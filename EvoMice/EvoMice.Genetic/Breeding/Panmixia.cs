@@ -20,12 +20,12 @@ namespace EvoMice.Genetic.Breeding
         /// <summary>
         /// Число создаваемых пар
         /// </summary>
-        protected int pairCount;
+        public int PairCount { get; protected set; }
 
         /// <summary>
         /// Создатель родительской пары
         /// </summary>
-        protected TParentsPairFactory parentsPairFactory;
+        public TParentsPairFactory ParentsPairFactory { get; protected set; }
 
         /// <summary>
         /// Панмиксия
@@ -34,17 +34,8 @@ namespace EvoMice.Genetic.Breeding
         /// <param name="pairCount">Число создаваемых пар</param>
         public Panmixia(TParentsPairFactory parentsPairFactory, int pairCount)
         {
-            this.pairCount = pairCount;
-            this.parentsPairFactory = parentsPairFactory;
-        }
-
-        /// <summary>
-        /// Число создаваемых пар
-        /// </summary>
-        public int PairCount
-        {
-            get { return pairCount; }
-            set { pairCount = value; }
+            PairCount = pairCount;
+            ParentsPairFactory = parentsPairFactory;
         }
 
         #region IBreeding<TChromosome,TIndividual,TParentsPair> Members
@@ -52,9 +43,9 @@ namespace EvoMice.Genetic.Breeding
         IList<TParentsPair> IBreeding<TChromosome, TIndividual, TParentsPair>.Select(IList<TIndividual> population)
         {
             int pCount = population.Count;
-            List<TParentsPair> pairs = new List<TParentsPair>(pairCount);
+            List<TParentsPair> pairs = new List<TParentsPair>(PairCount);
 
-            for (int i = 0; i < pairCount; i++)
+            for (int i = 0; i < PairCount; i++)
             {
                 int first = Util.Random.Next(pCount);
                 int second = Util.Random.Next(pCount - 1);
@@ -62,7 +53,7 @@ namespace EvoMice.Genetic.Breeding
                 if (second >= first)
                     second++;
 
-                pairs.Add(parentsPairFactory.CreatePair(
+                pairs.Add(ParentsPairFactory.CreatePair(
                         population[first], population[second]
                         ));
             }

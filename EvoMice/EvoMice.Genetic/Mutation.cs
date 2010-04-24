@@ -14,7 +14,7 @@ namespace EvoMice.Genetic
         /// <summary>
         /// Вероятность кроссовера
         /// </summary>
-        protected double probability;
+        public double Probability { get; protected set; }
 
         /// <summary>
         /// Мутация
@@ -22,16 +22,7 @@ namespace EvoMice.Genetic
         /// <param name="probability">Вероятность мутации</param>
         public Mutation(double probability)
         {
-            this.probability = probability;
-        }
-
-        /// <summary>
-        /// Вероятность кроссовера
-        /// </summary>
-        public double Probability
-        {
-            get { return probability; }
-            set { probability = value; }
+            Probability = probability;
         }
 
         /// <summary>
@@ -45,7 +36,7 @@ namespace EvoMice.Genetic
 
         TChromosome IMutation<TChromosome>.Mutate(TChromosome chromosome)
         {
-            if (Util.Random.NextDouble() <= probability)
+            if (Util.Random.NextDouble() <= Probability)
                 return DoMutation(chromosome);
             else
                 return chromosome;

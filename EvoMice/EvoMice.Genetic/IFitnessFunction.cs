@@ -13,6 +13,7 @@ namespace EvoMice.Genetic
         /// <summary>
         /// Вычислить приспособленность особи с данной хромосомой
         /// </summary>
+        /// <param name="chromosome">Хромосома</param>
         /// <returns>Приспособленность</returns>
         /// <remarks>Два разных вызова Calculate могут вернуть различные значения приспособленности</remarks>
         double Calculate(TChromosome chromosome);

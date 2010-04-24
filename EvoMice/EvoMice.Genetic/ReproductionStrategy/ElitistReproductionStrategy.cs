@@ -19,12 +19,12 @@ namespace EvoMice.Genetic.ReproductionStrategy
         /// Параметр перекрытия
         /// </summary>
         /// <remarks>1 - неперекрывающиеся множества</remarks>
-        protected double g;
+        public double g { get; protected set; }
 
         /// <summary>
         /// Метода отбора особей
         /// </summary>
-        protected TSelection selection;
+        public TSelection Selection { get; protected set; }
 
         /// <summary>
         /// Стратегия формирования следующего поколения на основе перекрытия поколений
@@ -34,26 +34,7 @@ namespace EvoMice.Genetic.ReproductionStrategy
         public ElitistReproductionStrategy(double g, TSelection selection)
         {
             this.g = g;
-            this.selection = selection;
-        }
-
-        /// <summary>
-        /// Параметр перекрытия
-        /// </summary>
-        /// <remarks>1 - неперекрывающиеся множества</remarks>
-        public double G
-        {
-            get { return g; }
-            set { g = value; }
-        }
-
-        /// <summary>
-        /// Метода отбора особей
-        /// </summary>
-        public TSelection Selection
-        {
-            get { return selection; }
-            set { selection = value; }
+            Selection = selection;
         }
 
         #region IReproductionStrategy<TChromosome,TIndividual> Members
@@ -73,7 +54,7 @@ namespace EvoMice.Genetic.ReproductionStrategy
                     newPopulation.Add(sortedPopulation[i]);
 
                 newPopulation.AddRange(
-                    selection.Select(reproductionGroup, population.Count - gCount - 1)
+                    Selection.Select(reproductionGroup, population.Count - gCount - 1)
                     );
             }
             return newPopulation;
