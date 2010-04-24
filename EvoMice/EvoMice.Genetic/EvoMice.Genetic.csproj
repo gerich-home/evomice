@@ -52,9 +52,6 @@
     <Compile Include="ReproductionStrategy\OverlapReproductionStrategy.cs" />
     <Compile Include="Selection\BTournamentSelection.cs" />
     <Compile Include="Selection\BinaryTournamentSelection.cs" />
-    <Compile Include="Selection\IStochasticSelector.cs" />
-    <Compile Include="Selection\IProbabilityCalculator.cs" />
-    <Compile Include="Selection\Selection.cs" />
     <Compile Include="Util\PopulationSorter.cs" />
     <Compile Include="VectorChromosome\Binary\BinaryPopulationInitializer.cs" />
     <Compile Include="VectorChromosome\Binary\HammingDistance.cs" />
