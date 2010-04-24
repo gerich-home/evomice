@@ -32,24 +32,37 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Breeding\Inbreeding.cs" />
     <Compile Include="Breeding\OutBreeding.cs" />
     <Compile Include="Breeding\Panmixia.cs" />
     <Compile Include="Breeding\PositiveAssociativeMating.cs" />
+    <Compile Include="ContinueCondition\GenerationContinueCondition.cs" />
     <Compile Include="Crossover.cs" />
     <Compile Include="IChromosomeDistance.cs" />
     <Compile Include="IGeneticAlgorithm.cs" />
-    <Compile Include="ReproductionStrategy\ReproductionStrategy.cs" />
+    <Compile Include="IIndividualFactory.cs" />
+    <Compile Include="IndividualFactory.cs" />
+    <Compile Include="IParentsPairFactory.cs" />
+    <Compile Include="ParentsPairFactory.cs" />
+    <Compile Include="ReproductionStrategy\ElitistReproductionStrategy.cs" />
+    <Compile Include="ReproductionStrategy\OverlapReproductionStrategy.cs" />
     <Compile Include="Selection\BTournamentSelection.cs" />
     <Compile Include="Selection\BinaryTournamentSelection.cs" />
+    <Compile Include="Selection\IStochasticSelector.cs" />
+    <Compile Include="Selection\IProbabilityCalculator.cs" />
+    <Compile Include="Selection\Selection.cs" />
     <Compile Include="Util\PopulationSorter.cs" />
     <Compile Include="VectorChromosome\Binary\BinaryPopulationInitializer.cs" />
     <Compile Include="VectorChromosome\Binary\HammingDistance.cs" />
     <Compile Include="VectorChromosome\Continuous\ContinuousChromosome.cs" />
     <Compile Include="VectorChromosome\Continuous\ContinuousPopulationInitializer.cs" />
+    <Compile Include="VectorChromosome\Continuous\Crossover\BLXCrossover.cs" />
     <Compile Include="VectorChromosome\Continuous\Distance.cs" />
+    <Compile Include="VectorChromosome\Crossover\TwoPointCrossover.cs" />
     <Compile Include="VectorChromosome\Crossover\HomogeneousFitnessCrossover.cs" />
     <Compile Include="VectorChromosome\Crossover\HomogeneousCrossover.cs" />
     <Compile Include="VectorChromosome\Crossover\RestrictedPointCrossover.cs" />

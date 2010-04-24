@@ -6,10 +6,44 @@ namespace EvoMice.Genetic.Util
 {
     public static class PopulationSorter
     {
-        public static List<TIndividual> SortPopulation<TChromosome, TIndividual>(IList<TIndividual> population)
+        /// <summary>
+        /// Сортирует популяцию по убыванию приспособленностей
+        /// </summary>
+        /// <typeparam name="TChromosome">Тип хромосомы индивида</typeparam>
+        /// <typeparam name="TIndividual">Тип индивида</typeparam>
+        /// <param name="population">Популяция</param>
+        /// <returns>Отсортированная популяция</returns>
+        public static TIndividual[] SortPopulation<TChromosome, TIndividual>(IList<TIndividual> population)
             where TIndividual : IIndividual<TChromosome>
         {
+            TIndividual[] sortedPopulation = new TIndividual[population.Count];
+            population.CopyTo(sortedPopulation, 0);
+            QSort<TChromosome, TIndividual>(sortedPopulation, 0, population.Count - 1);
+            return sortedPopulation;
+        }
 
+        private static void QSort<TChromosome, TIndividual>(TIndividual[] population, int left, int right)
+            where TIndividual : IIndividual<TChromosome>
+        {
+            int l = left;
+            int r = right;
+            double mFitness = population[left].Fitness;
+            while (l <= r)
+            {
+                while (population[l].Fitness > mFitness && l < right) l++;
+                while (mFitness > population[r].Fitness && r > left) r--;
+
+                if (l <= r)
+                {
+                    TIndividual tmp = population[l];
+                    population[l] = population[r];
+                    population[r] = tmp;
+                    l++; r--;
+                }
+            }
+
+            if (left < r) QSort<TChromosome, TIndividual>(population, left, r);
+            if (l < right) QSort<TChromosome, TIndividual>(population, l, right);
         }
     }
 }

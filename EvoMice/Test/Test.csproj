@@ -39,6 +39,10 @@
     <Compile Include="Test.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EvoMice.Genetic\EvoMice.Genetic.csproj">
+      <Project>{B5E20441-594A-424F-BB34-340288537559}</Project>
+      <Name>EvoMice.Genetic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EvoMice.Neuro\EvoMice.Neuro.csproj">
       <Project>{BA94C87B-EB0C-4AA2-AA7F-56E4D92F0AD2}</Project>
       <Name>EvoMice.Neuro</Name>

@@ -51,7 +51,7 @@ namespace EvoMice.Genetic.VectorChromosome.Binary
 
         #region IPopulationInitializer<BinaryChromosome> Members
 
-        IList<BinaryChromosome> IPopulationInitializer<BinaryChromosome>.Intialize()
+        IList<BinaryChromosome> IPopulationInitializer<BinaryChromosome>.Initialize()
         {
             List<BinaryChromosome> population = new List<BinaryChromosome>(populationSize);
 

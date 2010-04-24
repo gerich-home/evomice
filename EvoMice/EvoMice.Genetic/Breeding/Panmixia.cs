@@ -9,9 +9,13 @@ namespace EvoMice.Genetic.Breeding
     /// </summary>
     /// <typeparam name="TChromosome">Тип хромосомы индивида</typeparam>
     /// <typeparam name="TIndividual">Тип индивида</typeparam>
-    public class Panmixia<TChromosome, TIndividual> :
-        IBreeding<TChromosome, TIndividual, ParentsPair<TChromosome, TIndividual>>
+    /// <typeparam name="TParentsPair">Тип родительской пары</typeparam>
+    /// <typeparam name="TParentsPairFactory">Создатель родительской пары</typeparam>
+    public class Panmixia<TChromosome, TIndividual, TParentsPair, TParentsPairFactory> :
+        IBreeding<TChromosome, TIndividual, TParentsPair>
         where TIndividual : IIndividual<TChromosome>
+        where TParentsPair : IParentsPair<TChromosome, TIndividual>
+        where TParentsPairFactory : IParentsPairFactory<TChromosome, TIndividual, TParentsPair>
     {
         /// <summary>
         /// Число создаваемых пар
@@ -19,12 +23,19 @@ namespace EvoMice.Genetic.Breeding
         protected int pairCount;
 
         /// <summary>
+        /// Создатель родительской пары
+        /// </summary>
+        protected TParentsPairFactory parentsPairFactory;
+
+        /// <summary>
         /// Панмиксия
         /// </summary>
+        /// <param name="parentsPairFactory">Создатель родительской пары</param>
         /// <param name="pairCount">Число создаваемых пар</param>
-        public Panmixia(int pairCount)
+        public Panmixia(TParentsPairFactory parentsPairFactory, int pairCount)
         {
             this.pairCount = pairCount;
+            this.parentsPairFactory = parentsPairFactory;
         }
 
         /// <summary>
@@ -36,12 +47,12 @@ namespace EvoMice.Genetic.Breeding
             set { pairCount = value; }
         }
 
-        #region IBreeding<TChromosome,TIndividual,ParentsPair<TChromosome,TIndividual>> Members
+        #region IBreeding<TChromosome,TIndividual,TParentsPair> Members
 
-        IList<ParentsPair<TChromosome, TIndividual>> IBreeding<TChromosome, TIndividual, ParentsPair<TChromosome, TIndividual>>.Select(IList<TIndividual> population)
+        IList<TParentsPair> IBreeding<TChromosome, TIndividual, TParentsPair>.Select(IList<TIndividual> population)
         {
             int pCount = population.Count;
-            List<ParentsPair<TChromosome, TIndividual>> pairs = new List<ParentsPair<TChromosome, TIndividual>>(pairCount);
+            List<TParentsPair> pairs = new List<TParentsPair>(pairCount);
 
             for (int i = 0; i < pairCount; i++)
             {
@@ -51,9 +62,8 @@ namespace EvoMice.Genetic.Breeding
                 if (second >= first)
                     second++;
 
-                pairs.Add(
-                    new ParentsPair<TChromosome, TIndividual>(
-                        population[first],population[second]
+                pairs.Add(parentsPairFactory.CreatePair(
+                        population[first], population[second]
                         ));
             }
             return pairs;

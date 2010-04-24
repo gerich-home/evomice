@@ -14,6 +14,6 @@ namespace EvoMice.Genetic
         /// Сгенерировать первое поколение популяции
         /// </summary>
         /// <returns>Генофонд первого поколения</returns>
-        IList<TChromosome> Intialize();
+        IList<TChromosome> Initialize();
     }
 }

@@ -59,6 +59,7 @@ namespace EvoMice.Genetic.VectorChromosome.Continuous
         public double Value
         {
             get { return value; }
+            set { this.value=value; }
         }
 
         /// <summary>

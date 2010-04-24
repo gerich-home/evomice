@@ -8,23 +8,24 @@ namespace EvoMice.Genetic
     /// Генетический алгоритм
     /// </summary>
     /// <typeparam name="TChromosome">Тип хромосомы индивида</typeparam>
-    public class GeneticAlgorithm<TChromosome> :
-        IGeneticAlgorithm<TChromosome, IIndividual<TChromosome>>
+    /// <typeparam name="TIndividual">Тип индивида</typeparam>
+    /// <typeparam name="TParentsPair">Тип родительской пары</typeparam>
+    /// <typeparam name="TFitnessFunction">Тип функции приспособленности</typeparam>
+    public class GeneticAlgorithm<TChromosome, TIndividual, TParentsPair, TFitnessFunction> :
+        IGeneticAlgorithm<TChromosome, TIndividual, TFitnessFunction>
+        where TIndividual : IIndividual<TChromosome>
+        where TParentsPair : IParentsPair<TChromosome, TIndividual>
+        where TFitnessFunction : IFitnessFunction<TChromosome>
     {
         /// <summary>
         /// Лучшее решение, найденное генетическим алгоритмом
         /// </summary>
-        IIndividual<TChromosome> bestSolution;
-
-        /// <summary>
-        /// Функция приспособленности
-        /// </summary>
-        IFitnessFunction<TChromosome> fitnessFunction;
+        TIndividual bestSolution;
 
         /// <summary>
         /// Стратегия формирования следующей популяции
         /// </summary>
-        IReproductionStrategy<TChromosome, Individual<TChromosome>> strategy;
+        IReproductionStrategy<TChromosome, TIndividual> strategy;
 
         /// <summary>
         /// Инициализатор первой популяции
@@ -34,17 +35,22 @@ namespace EvoMice.Genetic
         /// <summary>
         /// Условие продолжения генетического алгоритма
         /// </summary>
-        IContinueCondition<TChromosome, Individual<TChromosome>> continueCondition;
+        IContinueCondition<TChromosome, TIndividual> continueCondition;
+
+        /// <summary>
+        /// Создатель индивида
+        /// </summary>
+        IIndividualFactory<TChromosome, TIndividual, TFitnessFunction> individualFactory;
 
         /// <summary>
         /// Система подбора родительских пар
         /// </summary>
-        IBreeding<TChromosome, Individual<TChromosome>, ParentsPair<TChromosome, Individual<TChromosome>>> breeding;
+        IBreeding<TChromosome, TIndividual, TParentsPair> breeding;
 
         /// <summary>
         /// Кроссовер
         /// </summary>
-        ICrossover<TChromosome, Individual<TChromosome>, ParentsPair<TChromosome, Individual<TChromosome>>> crossover;
+        ICrossover<TChromosome, TIndividual, TParentsPair> crossover;
 
         /// <summary>
         /// Мутация
@@ -58,61 +64,62 @@ namespace EvoMice.Genetic
         /// <param name="strategy">Стратегия формирования следующей популяции</param>
         /// <param name="populationInitializer">Инициализатор первой популяции</param>
         /// <param name="continueCondition">Условие продолжения генетического алгоритма</param>
+        /// <param name="individualFactory">Создатель индивида</param>
         /// <param name="breeding">Система подбора родительских пар</param>
         /// <param name="crossover">Кроссовер</param>
         /// <param name="mutation">Мутация</param>
         public GeneticAlgorithm(
-            IFitnessFunction<TChromosome> fitnessFunction,
-            IReproductionStrategy<TChromosome, Individual<TChromosome>> strategy,
+            IReproductionStrategy<TChromosome, TIndividual> strategy,
             IPopulationInitializer<TChromosome> populationInitializer,
-            IContinueCondition<TChromosome, Individual<TChromosome>> continueCondition,
-            IBreeding<TChromosome, Individual<TChromosome>, ParentsPair<TChromosome, Individual<TChromosome>>> breeding,
-            ICrossover<TChromosome, Individual<TChromosome>, ParentsPair<TChromosome, Individual<TChromosome>>> crossover,
+            IContinueCondition<TChromosome, TIndividual> continueCondition,
+            IIndividualFactory<TChromosome,TIndividual,TFitnessFunction> individualFactory,
+            IBreeding<TChromosome, TIndividual, TParentsPair> breeding,
+            ICrossover<TChromosome, TIndividual, TParentsPair> crossover,
             IMutation<TChromosome> mutation
             )
         {
-            this.fitnessFunction = fitnessFunction;
             this.strategy = strategy;
             this.populationInitializer = populationInitializer;
             this.continueCondition = continueCondition;
+            this.individualFactory = individualFactory;
             this.breeding = breeding;
             this.crossover = crossover;
             this.mutation = mutation;
-            bestSolution = null;
+            bestSolution = default(TIndividual);
         }
 
-        #region IGeneticAlgorithm<TChromosome> Members
+        #region IGeneticAlgorithm<TChromosome,TIndividual,TFitnessFunction> Members
 
         /// <summary>
         /// Работа генетического алгоритма
         /// </summary>
-        public void Run()
+        /// <param name="fitnessFunction">Функция приспособленности</param>
+        public void Run(TFitnessFunction fitnessFunction)
         {
             int generation = 0;
 
             IList<TChromosome> currentPopulationsChromosomes;
-            IList<Individual<TChromosome>> currentPopulation;
+            IList<TIndividual> currentPopulation;
 
-            IList<ParentsPair<TChromosome, Individual<TChromosome>>> pairs;
+            IList<TParentsPair> pairs;
 
             IList<TChromosome> children;
 
             TChromosome mutant;
 
-            List<Individual<TChromosome>> reproductionGroup =
-                new List<Individual<TChromosome>>();
+            List<TIndividual> reproductionGroup = new List<TIndividual>();
 
-            currentPopulationsChromosomes = populationInitializer.Intialize();
+            currentPopulationsChromosomes = populationInitializer.Initialize();
 
-            currentPopulation = new List<Individual<TChromosome>>();
+            currentPopulation = new List<TIndividual>();
             foreach (TChromosome chromosome in currentPopulationsChromosomes)
                 currentPopulation.Add(
-                    new Individual<TChromosome>(chromosome, fitnessFunction)
+                    individualFactory.CreateIndividual(chromosome, fitnessFunction)
                     );
 
             bestSolution = currentPopulation[0];
 
-            foreach (Individual<TChromosome> individual in currentPopulation)
+            foreach (TIndividual individual in currentPopulation)
                 if (individual.Fitness > bestSolution.Fitness)
                     bestSolution = individual;
 
@@ -122,8 +129,7 @@ namespace EvoMice.Genetic
 
                 pairs = breeding.Select(currentPopulation);
 
-                foreach (ParentsPair<TChromosome, Individual<TChromosome>>
-                    pair in pairs)
+                foreach (TParentsPair pair in pairs)
                 {
                     children = crossover.Crossover(pair);
 
@@ -132,12 +138,12 @@ namespace EvoMice.Genetic
                         mutant = mutation.Mutate(chromosome);
 
                         reproductionGroup.Add(
-                            new Individual<TChromosome>(mutant, fitnessFunction)
+                            individualFactory.CreateIndividual(mutant, fitnessFunction)
                             );
                     }
                 }
 
-                foreach (Individual<TChromosome> individual in reproductionGroup)
+                foreach (TIndividual individual in reproductionGroup)
                     if (individual.Fitness > bestSolution.Fitness)
                         bestSolution = individual;
 
@@ -145,6 +151,7 @@ namespace EvoMice.Genetic
                     currentPopulation,
                     reproductionGroup
                     );
+
                 generation++;
             }
         }
@@ -152,9 +159,9 @@ namespace EvoMice.Genetic
         /// <summary>
         /// Лучшее решение, найденное генетическим алгоритмом
         /// </summary>
-        public IIndividual<TChromosome> BestSolution
+        public TIndividual BestSolution
         {
-            get { return BestSolution; }
+            get { return bestSolution; }
         }
 
         #endregion

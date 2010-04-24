@@ -94,7 +94,7 @@ namespace EvoMice.Genetic.VectorChromosome.Continuous
 
         #region IPopulationInitializer<ContinuousChromosome> Members
 
-        IList<ContinuousChromosome> IPopulationInitializer<ContinuousChromosome>.Intialize()
+        IList<ContinuousChromosome> IPopulationInitializer<ContinuousChromosome>.Initialize()
         {
             List<ContinuousChromosome> population = new List<ContinuousChromosome>(populationSize);
 

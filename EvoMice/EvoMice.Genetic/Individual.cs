@@ -33,6 +33,7 @@ namespace EvoMice.Genetic
         public Individual(TChromosome chromosome, IFitnessFunction<TChromosome> fitnessFunction)
         {
             this.chromosome = chromosome;
+            this.fitnessFunction = fitnessFunction;
             RecalculateFitness();
         }
 

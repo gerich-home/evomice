@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EvoMice.Genetic.Mutation
+namespace EvoMice.Genetic.Selection
 {
     /// <summary>
     /// Бинарная турнирная селекция

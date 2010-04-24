@@ -5,24 +5,21 @@ using System.Text;
 namespace EvoMice.Genetic
 {
     /// <summary>
-    /// Генетический алгоритм
+    /// Создатель индивида
     /// </summary>
     /// <typeparam name="TChromosome">Тип хромосомы индивида</typeparam>
     /// <typeparam name="TIndividual">Тип индивида</typeparam>
     /// <typeparam name="TFitnessFunction">Тип функции приспособленности</typeparam>
-    public interface IGeneticAlgorithm<TChromosome, TIndividual, TFitnessFunction>
+    public interface IIndividualFactory<TChromosome, TIndividual, TFitnessFunction>
         where TIndividual : IIndividual<TChromosome>
         where TFitnessFunction : IFitnessFunction<TChromosome>
     {
         /// <summary>
-        /// Запуск генетического алгоритма
+        /// Создаёт нового индивида
         /// </summary>
-        /// <param name="fitnessFunction">Функция приспосбленности</param>
-        void Run(TFitnessFunction fitnessFunction);
-
-        /// <summary>
-        /// Лучшее решение, найденное генетическим алгоритмом
-        /// </summary>
-        TIndividual BestSolution { get; }
+        /// <param name="chromosome">Хромосома индивида</param>
+        /// <param name="fitnessFunction">Функция приспособленности для оценки индивида</param>
+        /// <returns>Индивид</returns>
+        TIndividual CreateIndividual(TChromosome chromosome, TFitnessFunction fitnessFunction);
     }
 }

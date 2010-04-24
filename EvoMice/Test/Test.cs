@@ -1,12 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+
 using EvoMice.Neuro;
 using EvoMice.Neuro.Neurons;
 using EvoMice.Neuro.Synapses;
 
+using EvoMice.Genetic;
+using EvoMice.Genetic.Breeding;
+using EvoMice.Genetic.ContinueCondition;
+using EvoMice.Genetic.ReproductionStrategy;
+using EvoMice.Genetic.Selection;
+using EvoMice.Genetic.Util;
+using EvoMice.Genetic.VectorChromosome;
+using EvoMice.Genetic.VectorChromosome.Binary;
+using EvoMice.Genetic.VectorChromosome.Continuous;
+using EvoMice.Genetic.VectorChromosome.Continuous.Crossover;
+using EvoMice.Genetic.VectorChromosome.Crossover;
+using EvoMice.Genetic.VectorChromosome.Mutation;
+
 namespace EvoMice
 {
+    class SquaredFunc : IFitnessFunction<ContinuousChromosome>
+    {
+        double offset;
+        public SquaredFunc(double offset)
+        {
+            this.offset = offset;
+        }
+
+        #region IFitnessFunction<ContinuousChromosome> Members
+
+        public double Calculate(ContinuousChromosome chromosome)
+        {
+            double s = 0;
+            for (int i = 0; i < chromosome.Length; i++)
+            {
+                double d = chromosome[i].Value - offset;
+                s += d * d;
+            }
+            double l = Math.Sqrt(s);
+            //return 200-(1- Math.Cos(l) + 0.2*l);
+            return Math.Exp(-s) + Math.Cos(l)+1;
+        }
+
+        #endregion
+    }
+
     class Test
     {
         delegate bool TestDelegate();
@@ -22,6 +62,56 @@ namespace EvoMice
                 Console.WriteLine("{0}:\t пройден", description);
             else
                 Console.WriteLine("{0}:\t НЕ ПРОЙДЕН", description);
+
+        }
+
+        static bool testGeneticClasses()
+        {
+            GeneticAlgorithm<ContinuousChromosome,
+                Individual<ContinuousChromosome>,
+                ParentsPair<ContinuousChromosome, Individual<ContinuousChromosome>>,
+                IFitnessFunction<ContinuousChromosome>
+                > ga =
+                new GeneticAlgorithm<ContinuousChromosome,
+                    Individual<ContinuousChromosome>,
+                    ParentsPair<ContinuousChromosome, Individual<ContinuousChromosome>>,
+                    IFitnessFunction<ContinuousChromosome>
+                    >(
+                    new ElitistReproductionStrategy<ContinuousChromosome, Individual<ContinuousChromosome>, ISelection<ContinuousChromosome, Individual<ContinuousChromosome>>>
+                        (0.2, 
+                        //new BTournamentSelection<ContinuousChromosome,Individual<ContinuousChromosome>>(4)
+                        new RouletteSelection<ContinuousChromosome, Individual<ContinuousChromosome>>
+                            (2)
+                        ),
+                    new ContinuousPopulationInitializer
+                         (500, 2, -20, 20),
+                    new GenerationContinueCondition<ContinuousChromosome, Individual<ContinuousChromosome>>
+                        (20),
+                    new IndividualFactory<ContinuousChromosome, IFitnessFunction<ContinuousChromosome>>(),
+                    new Panmixia<ContinuousChromosome, Individual<ContinuousChromosome>,ParentsPair<ContinuousChromosome, Individual<ContinuousChromosome>>, ParentsPairFactory<ContinuousChromosome,Individual<ContinuousChromosome>>>
+                        (new ParentsPairFactory<ContinuousChromosome,Individual<ContinuousChromosome>>(),
+                        50),
+                    new BLXCrossover<Individual<ContinuousChromosome>, ParentsPair<ContinuousChromosome, Individual<ContinuousChromosome>>, ContinuousLocus>
+                        (0.8, 0.2),
+                    new PointMutation<ContinuousChromosome, ContinuousLocus>
+                        (0.03)
+                    );
+
+            DateTime t = DateTime.Now;
+            ga.Run(new SquaredFunc(10));
+            Console.WriteLine((DateTime.Now - t).TotalMilliseconds);
+
+            Console.WriteLine(ga.BestSolution.Fitness);
+            ga.BestSolution.RecalculateFitness();
+            Console.WriteLine("[{0}, {1}]", ga.BestSolution.Chromosome[0].Value, ga.BestSolution.Chromosome[1].Value);
+            return true;
+        }
+
+        static void TestGenetic()
+        {
+            Console.WriteLine("\tТестируем EvoMice.Genetic");
+
+            RunTest(new TestDelegate(testGeneticClasses), "Классы генетического алгоритма");
 
         }
 
@@ -60,26 +150,11 @@ namespace EvoMice
             return true;
         }
 
-        static bool testGeneticClasses()
-        {
-
-
-            return true;
-        }
-
         static void TestNeuro()
         {
             Console.WriteLine("\tТестируем EvoMice.Neuro");
 
             RunTest(new TestDelegate(testNeuroStruct), "Работа нейронной сети");
-
-        }
-
-        static void TestGenetic()
-        {
-            Console.WriteLine("\tТестируем EvoMice.Genetic");
-
-            RunTest(new TestDelegate(testGeneticClasses), "Классы генетического алгоритма");
 
         }
 

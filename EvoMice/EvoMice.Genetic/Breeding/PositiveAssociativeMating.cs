@@ -9,10 +9,13 @@ namespace EvoMice.Genetic.Breeding
     /// </summary>
     /// <typeparam name="TChromosome">Тип хромосомы индивида</typeparam>
     /// <typeparam name="TIndividual">Тип индивида</typeparam>
-    /// <typeparam name="TChromosomeDistance">Тип вычислителя расстояния между хромосомами</typeparam>
-    public class PositiveAssociativeMating<TChromosome, TIndividual> :
-        IBreeding<TChromosome, TIndividual, ParentsPair<TChromosome, TIndividual>>
+    /// <typeparam name="TParentsPair">Тип родительской пары</typeparam>
+    /// <typeparam name="TParentsPairFactory">Создатель родительской пары</typeparam>
+    public class PositiveAssociativeMating<TChromosome, TIndividual, TParentsPair, TParentsPairFactory> :
+        IBreeding<TChromosome, TIndividual, TParentsPair>
         where TIndividual : IIndividual<TChromosome>
+        where TParentsPair : IParentsPair<TChromosome, TIndividual>
+        where TParentsPairFactory : IParentsPairFactory<TChromosome, TIndividual, TParentsPair>
     {
         /// <summary>
         /// Максимальная разница между приспособленностями скрещиваемых особей
@@ -20,26 +23,26 @@ namespace EvoMice.Genetic.Breeding
         protected double maxDelta;
 
         /// <summary>
-        /// Число попыток найти хорошую пару
-        /// </summary>
-        protected int numTests;
-
-        /// <summary>
         /// Число создаваемых пар
         /// </summary>
         protected int pairCount;
 
         /// <summary>
+        /// Создатель родительской пары
+        /// </summary>
+        protected TParentsPairFactory parentsPairFactory;
+
+        /// <summary>
         /// Позитивное ассоциативное скрещивание
         /// </summary>
+        /// <param name="parentsPairFactory">Создатель родительской пары</param>
         /// <param name="maxDelta">Максимальная разница между приспособленностями скрещиваемых особей</param>
-        /// <param name="numTests">Число попыток найти хорошую пару</param>
         /// <param name="pairCount">Число создаваемых пар</param>
-        public PositiveAssociativeMating(double maxDelta, int numTests, int pairCount)
+        public PositiveAssociativeMating(TParentsPairFactory parentsPairFactory, double maxDelta, int pairCount)
         {
             this.maxDelta = maxDelta;
-            this.numTests = numTests;
             this.pairCount = pairCount;
+            this.parentsPairFactory = parentsPairFactory;
         }
 
         /// <summary>
@@ -52,15 +55,6 @@ namespace EvoMice.Genetic.Breeding
         }
 
         /// <summary>
-        /// Число попыток найти хорошую пару
-        /// </summary>
-        public int NumTests
-        {
-            get { return numTests; }
-            set { numTests = value; }
-        }
-
-        /// <summary>
         /// Число создаваемых пар
         /// </summary>
         public int PairCount
@@ -69,12 +63,50 @@ namespace EvoMice.Genetic.Breeding
             set { pairCount = value; }
         }
 
-        #region IBreeding<TChromosome,TIndividual,ParentsPair<TChromosome,TIndividual>> Members
+        #region IBreeding<TChromosome,TIndividual,TParentsPair> Members
 
-        IList<ParentsPair<TChromosome, TIndividual>> IBreeding<TChromosome, TIndividual, ParentsPair<TChromosome, TIndividual>>.Select(IList<TIndividual> population)
+        IList<TParentsPair> IBreeding<TChromosome, TIndividual, TParentsPair>.Select(IList<TIndividual> population)
         {
-            //Надо отсортировать population по приспособленности
-            throw new NotImplementedException("PositiveAssociativeMating");
+            TIndividual[] sortedPopulation =
+                Util.PopulationSorter.SortPopulation<TChromosome, TIndividual>(
+                    population
+                );
+
+            int pCount = population.Count;
+            List<TParentsPair> pairs =
+                new List<TParentsPair>(pairCount);
+
+            int minInd;
+            int maxInd;
+
+            for (int i = 0; i < pairCount; i++)
+            {
+                int firstInd = Util.Random.Next(pCount);
+                TIndividual first = sortedPopulation[firstInd];
+
+                for (minInd = firstInd - 1; minInd >= 0; minInd--)
+                    if ((sortedPopulation[minInd].Fitness - first.Fitness) > maxDelta)
+                        break;
+
+                for (maxInd = firstInd + 1; maxInd < pCount; maxInd++)
+                    if ((first.Fitness - sortedPopulation[maxInd].Fitness) > maxDelta)
+                        break;
+
+                if (maxInd - minInd == 2)
+                {
+                    i--;
+                    continue;
+                }
+
+                int secondInd = minInd + 1 + Util.Random.Next(maxInd - minInd - 2);
+                if (secondInd >= firstInd)
+                    secondInd++;
+
+                TIndividual second = population[secondInd];
+
+                pairs.Add(parentsPairFactory.CreatePair(first, second));
+            }
+            return pairs;
         }
 
         #endregion

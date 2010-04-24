@@ -44,6 +44,7 @@ namespace EvoMice.Genetic.VectorChromosome.Binary
         public int Value
         {
             get { return value; }
+            set { this.value = value; }
         }
 
         #region ICopyable<BinaryLocus> Members

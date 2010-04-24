@@ -10,15 +10,24 @@ namespace EvoMice.Genetic.Breeding
     /// <typeparam name="TChromosome">Тип хромосомы индивида</typeparam>
     /// <typeparam name="TIndividual">Тип индивида</typeparam>
     /// <typeparam name="TChromosomeDistance">Тип вычислителя расстояния между хромосомами</typeparam>
-    public class Outbreeding<TChromosome, TIndividual, TChromosomeDistance> :
-        IBreeding<TChromosome, TIndividual, ParentsPair<TChromosome, TIndividual>>
+    /// <typeparam name="TParentsPair">Тип родительской пары</typeparam>
+    /// <typeparam name="TParentsPairFactory">Создатель родительской пары</typeparam>
+    public class Outbreeding<TChromosome, TIndividual, TChromosomeDistance, TParentsPair, TParentsPairFactory> :
+        IBreeding<TChromosome, TIndividual, TParentsPair>
         where TIndividual : IIndividual<TChromosome>
         where TChromosomeDistance : IChromosomeDistance<TChromosome>
+        where TParentsPair : IParentsPair<TChromosome, TIndividual>
+        where TParentsPairFactory : IParentsPairFactory<TChromosome, TIndividual, TParentsPair>
     {
         /// <summary>
         /// Вычислитель расстояния между хромосомами
         /// </summary>
-        protected TChromosomeDistance сhromosomeDistance;
+        protected TChromosomeDistance chromosomeDistance;
+
+        /// <summary>
+        /// Создатель родительской пары
+        /// </summary>
+        protected TParentsPairFactory parentsPairFactory;
 
         /// <summary>
         /// Минимальная дистанция между скрещиваемыми хромосомами
@@ -38,13 +47,15 @@ namespace EvoMice.Genetic.Breeding
         /// <summary>
         /// Аутбридинг
         /// </summary>
-        /// <param name="сhromosomeDistance">Вычислитель расстояния между хромосомами</param>
+        /// <param name="chromosomeDistance">Вычислитель расстояния между хромосомами</param>
+        /// <param name="parentsPairFactory">Создатель родительской пары</param>
         /// <param name="minDistance">Минимальная дистанция между скрещиваемыми хромосомами</param>
         /// <param name="numTests">Число попыток найти хорошую пару</param>
         /// <param name="pairCount">Число создаваемых пар</param>
-        public Outbreeding(TChromosomeDistance сhromosomeDistance, double minDistance, int numTests, int pairCount)
+        public Outbreeding(TChromosomeDistance chromosomeDistance, TParentsPairFactory parentsPairFactory, double minDistance, int numTests, int pairCount)
         {
-            this.сhromosomeDistance = сhromosomeDistance;
+            this.chromosomeDistance = chromosomeDistance;
+            this.parentsPairFactory = parentsPairFactory;
             this.minDistance = minDistance;
             this.numTests = numTests;
             this.pairCount = pairCount;
@@ -55,8 +66,8 @@ namespace EvoMice.Genetic.Breeding
         /// </summary>
         public TChromosomeDistance ChromosomeDistance
         {
-            get { return сhromosomeDistance; }
-            set { сhromosomeDistance = value; }
+            get { return chromosomeDistance; }
+            set { chromosomeDistance = value; }
         }
 
         /// <summary>
@@ -86,12 +97,12 @@ namespace EvoMice.Genetic.Breeding
             set { pairCount = value; }
         }
 
-        #region IBreeding<TChromosome,TIndividual,ParentsPair<TChromosome,TIndividual>> Members
+        #region IBreeding<TChromosome,TIndividual,TParentsPair> Members
 
-        IList<ParentsPair<TChromosome, TIndividual>> IBreeding<TChromosome, TIndividual, ParentsPair<TChromosome, TIndividual>>.Select(IList<TIndividual> population)
+        IList<TParentsPair> IBreeding<TChromosome, TIndividual, TParentsPair>.Select(IList<TIndividual> population)
         {
             int pCount = population.Count;
-            List<ParentsPair<TChromosome, TIndividual>> pairs = new List<ParentsPair<TChromosome, TIndividual>>(pairCount);
+            List<TParentsPair> pairs = new List<TParentsPair>(pairCount);
             for (int i = 0; i < pairCount; i++)
             {
                 int firstInd = Util.Random.Next(pCount);
@@ -102,7 +113,7 @@ namespace EvoMice.Genetic.Breeding
                     secondInd++;
 
                 TIndividual best = population[secondInd];
-                double bestDistance = сhromosomeDistance.Distance(
+                double bestDistance = chromosomeDistance.Distance(
                     first.Chromosome, best.Chromosome);
 
                 for (int j = 0; j < numTests && bestDistance < minDistance; j++)
@@ -112,8 +123,8 @@ namespace EvoMice.Genetic.Breeding
                         secondInd++;
 
                     TIndividual second = population[secondInd];
-                    double distance = сhromosomeDistance.Distance(
-                        first.Chromosome,second.Chromosome);
+                    double distance = chromosomeDistance.Distance(
+                        first.Chromosome, second.Chromosome);
                     if (distance > bestDistance)
                     {
                         bestDistance = distance;
@@ -121,7 +132,7 @@ namespace EvoMice.Genetic.Breeding
                     }
                 }
 
-                pairs.Add(new ParentsPair<TChromosome, TIndividual>(first, best));
+                pairs.Add(parentsPairFactory.CreatePair(first, best));
             }
             return pairs;
         }

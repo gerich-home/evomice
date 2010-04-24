@@ -1,11 +1,11 @@
-﻿Реализовать:
-Масштабирование в пропорциональной селекции
+﻿Продумать алгоритмы селекции(то есть разделить селекцию
+на выбор вероятностей или рангов для особей и вероятностный отбор)
 
 Добавить:
-EvoMice.Genetic.Breeding.PositiveAssociativeMating
 EvoMice.Genetic.Breeding.NegativeAssociativeMating
 EvoMice.Genetic.Breeding.SelectingBreeding
 
+EvoMice.Genetic.Selection.Selection
 EvoMice.Genetic.Selection.LinearRangeSelection
 EvoMice.Genetic.Selection.NonLinearRangeSelection
 EvoMice.Genetic.Selection.BoltzmannSelection
@@ -14,10 +14,8 @@ EvoMice.Genetic.Selection.PowerLawSelection
 EvoMice.Genetic.VectorChromosome.Mutation.Inversion
 EvoMice.Genetic.VectorChromosome.Mutation.Translocation
 
-EvoMice.Genetic.VectorChromosome.Crossover.DoblePointCrossover
-EvoMice.Genetic.VectorChromosome.Crossover.RestrictedDoblePointCrossover
+EvoMice.Genetic.VectorChromosome.Crossover.RestrictedTwoPointCrossover
 EvoMice.Genetic.VectorChromosome.Crossover.MultiPointCrossover
 
-EvoMice.Genetic.VectorChromosome.Continuous.Crossover.BLXCrossover
 EvoMice.Genetic.VectorChromosome.Continuous.Crossover.FlatCrossover
 EvoMice.Genetic.VectorChromosome.Continuous.Crossover.LinearCrossover
