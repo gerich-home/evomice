@@ -7,7 +7,7 @@ namespace EvoMice.Genetic.VectorChromosome.Binary
     /// <summary>
     /// Инициализатор первого поколения из бинарных хромосом
     /// </summary>
-    public class BinaryPopulationInitializer : 
+    public class BinaryPopulationInitializer :
         IPopulationInitializer<BinaryChromosome>
     {
         /// <summary>

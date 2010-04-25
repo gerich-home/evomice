@@ -22,7 +22,7 @@ namespace EvoMice.Genetic.Breeding
         /// <summary>
         /// Вычислитель расстояния между хромосомами
         /// </summary>
-        public TChromosomeDistance ChromosomeDistance{ get; protected set; }
+        public TChromosomeDistance ChromosomeDistance { get; protected set; }
 
         /// <summary>
         /// Создатель родительской пары
@@ -37,12 +37,12 @@ namespace EvoMice.Genetic.Breeding
         /// <summary>
         /// Число попыток найти хорошую пару
         /// </summary>
-        public int NumTests{ get; protected set; }
+        public int NumTests { get; protected set; }
 
         /// <summary>
         /// Число создаваемых пар
         /// </summary>
-        public int PairCount{ get; protected set; }
+        public int PairCount { get; protected set; }
 
         /// <summary>
         /// Инбридинг

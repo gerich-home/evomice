@@ -59,6 +59,7 @@
     <Compile Include="VectorChromosome\Continuous\ContinuousPopulationInitializer.cs" />
     <Compile Include="VectorChromosome\Continuous\Crossover\BLXCrossover.cs" />
     <Compile Include="VectorChromosome\Continuous\Distance.cs" />
+    <Compile Include="VectorChromosome\Continuous\Mutation\DirectionalMutation.cs" />
     <Compile Include="VectorChromosome\Crossover\TwoPointCrossover.cs" />
     <Compile Include="VectorChromosome\Crossover\HomogeneousFitnessCrossover.cs" />
     <Compile Include="VectorChromosome\Crossover\HomogeneousCrossover.cs" />

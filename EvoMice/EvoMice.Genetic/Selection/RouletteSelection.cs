@@ -16,7 +16,7 @@ namespace EvoMice.Genetic.Selection
         /// <summary>
         /// Математичкое ожидание числа копий самой приспособленной особи
         /// </summary>
-        public double c{ get; protected set; }
+        public double c { get; protected set; }
 
         /// <summary>
         /// Отбор методом рулетки
@@ -49,7 +49,13 @@ namespace EvoMice.Genetic.Selection
             }
             aveFitness /= rCount;
 
-            if (minFitness * (c - 1) >= (maxFitness - c * aveFitness))
+            if (minFitness == aveFitness || aveFitness == -maxFitness)
+            {
+                for (int i = 0; i < count; i++)
+                    selected.Add(reproductionGroup[Util.Random.Next(rCount)]);
+                return selected;
+            }
+            else if (minFitness * (c - 1) >= (maxFitness - c * aveFitness))
             {
                 a = (c - 1) * aveFitness / (aveFitness + maxFitness);
                 b = aveFitness * (maxFitness - c * aveFitness) / (aveFitness - minFitness);

@@ -8,7 +8,7 @@ namespace EvoMice.Genetic
     /// Мутация
     /// </summary>
     /// <typeparam name="TChromosome">Тип хромосомы индивида</typeparam>
-    public abstract class Mutation<TChromosome> : 
+    public abstract class Mutation<TChromosome> :
         IMutation<TChromosome>
     {
         /// <summary>

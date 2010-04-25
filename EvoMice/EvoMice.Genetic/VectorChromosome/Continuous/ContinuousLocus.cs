@@ -15,7 +15,19 @@ namespace EvoMice.Genetic.VectorChromosome.Continuous
         /// <summary>
         /// Значение локуса
         /// </summary>
-        public double Value { get; set; }
+        private double value;
+
+        /// <summary>
+        /// Значение локуса
+        /// </summary>
+        public double Value
+        {
+            get { return value; }
+            set
+            {
+                this.value = Math.Min(Math.Max(value, LowBound), HighBound);
+            }
+        }
 
         /// <summary>
         /// Нижнее допустимое значение
@@ -35,9 +47,9 @@ namespace EvoMice.Genetic.VectorChromosome.Continuous
         /// <remarks>Заполнен случайным значением</remarks>
         public ContinuousLocus(double lowBound, double highBound)
         {
-            Value = Util.Random.NextDouble() * (highBound - lowBound) + lowBound;
             LowBound = lowBound;
             HighBound = highBound;
+            Value = Util.Random.NextDouble() * (highBound - lowBound) + lowBound;
         }
 
         /// <summary>
@@ -48,9 +60,9 @@ namespace EvoMice.Genetic.VectorChromosome.Continuous
         /// <param name="value">Значение локуса</param>
         public ContinuousLocus(double lowBound, double highBound, double value)
         {
-            Value = value;
             LowBound = lowBound;
             HighBound = highBound;
+            Value = value;
         }
 
         #region ICopyable<ContinuousLocus> Members

@@ -39,8 +39,8 @@ namespace EvoMice.Genetic.VectorChromosome.Continuous
         /// <param name="highBound">Верхнее допустимое значение локусов</param>
         public ContinuousPopulationInitializer(
             int populationSize,
-            int chromosomeLength, 
-            double lowBound, 
+            int chromosomeLength,
+            double lowBound,
             double highBound)
         {
             PopulationSize = populationSize;

@@ -119,9 +119,10 @@ namespace EvoMice.Genetic
 
             while (ContinueCondition.ShouldContinue(currentPopulation, generation))
             {
-                reproductionGroup.Clear();
 
                 pairs = Breeding.Select(currentPopulation);
+
+                reproductionGroup.Clear();
 
                 foreach (TParentsPair pair in pairs)
                 {

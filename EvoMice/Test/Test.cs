@@ -7,7 +7,7 @@ using EvoMice.Neuro.Neurons;
 using EvoMice.Neuro.Synapses;
 
 using EvoMice.Genetic;
-using EvoMice.Genetic.Breeding;
+using EvoMice.Genetic.Bkreeding;
 using EvoMice.Genetic.ContinueCondition;
 using EvoMice.Genetic.ReproductionStrategy;
 using EvoMice.Genetic.Selection;
@@ -41,7 +41,7 @@ namespace EvoMice
             }
             double l = Math.Sqrt(s);
             //return 200-(1- Math.Cos(l) + 0.2*l);
-            return Math.Exp(-s) + Math.Cos(l)+1;
+            return Math.Exp(-s) + Math.Cos(l) + 1;
         }
 
         #endregion
@@ -78,8 +78,8 @@ namespace EvoMice
                     IFitnessFunction<ContinuousChromosome>
                     >(
                     new ElitistReproductionStrategy<ContinuousChromosome, Individual<ContinuousChromosome>, ISelection<ContinuousChromosome, Individual<ContinuousChromosome>>>
-                        (0.2, 
-                        //new BTournamentSelection<ContinuousChromosome,Individual<ContinuousChromosome>>(4)
+                        (0.2,
+                //new BTournamentSelection<ContinuousChromosome,Individual<ContinuousChromosome>>(4)
                         new RouletteSelection<ContinuousChromosome, Individual<ContinuousChromosome>>
                             (2)
                         ),
@@ -88,10 +88,10 @@ namespace EvoMice
                     new GenerationContinueCondition<ContinuousChromosome, Individual<ContinuousChromosome>>
                         (20),
                     new IndividualFactory<ContinuousChromosome, IFitnessFunction<ContinuousChromosome>>(),
-                    new Panmixia<ContinuousChromosome, Individual<ContinuousChromosome>,ParentsPair<ContinuousChromosome, Individual<ContinuousChromosome>>, ParentsPairFactory<ContinuousChromosome,Individual<ContinuousChromosome>>>
-                        (new ParentsPairFactory<ContinuousChromosome,Individual<ContinuousChromosome>>(),
+                    new Panmixia<ContinuousChromosome, Individual<ContinuousChromosome>, ParentsPair<ContinuousChromosome, Individual<ContinuousChromosome>>, ParentsPairFactory<ContinuousChromosome, Individual<ContinuousChromosome>>>
+                        (new ParentsPairFactory<ContinuousChromosome, Individual<ContinuousChromosome>>(),
                         50),
-                    new BLXCrossover<Individual<ContinuousChromosome>, ParentsPair<ContinuousChromosome, Individual<ContinuousChromosome>>, ContinuousLocus>
+                    new BLXCrossover<Individual<ContinuousChromosome>, ParentsPair<ContinuousChromosome, Individual<ContinuousChromosome>>>
                         (0.8, 0.2),
                     new PointMutation<ContinuousChromosome, ContinuousLocus>
                         (0.03)

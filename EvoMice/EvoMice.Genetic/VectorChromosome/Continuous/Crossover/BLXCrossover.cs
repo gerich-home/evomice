@@ -9,8 +9,7 @@ namespace EvoMice.Genetic.VectorChromosome.Continuous.Crossover
     /// </summary>
     /// <typeparam name="TIndividual">Тип индивида</typeparam>
     /// <typeparam name="TParentsPair">Тип родительской пары</typeparam>
-    /// <typeparam name="TLocus">Тип локусов</typeparam>
-    public class BLXCrossover<TIndividual, TParentsPair, TLocus> :
+    public class BLXCrossover<TIndividual, TParentsPair> :
         Crossover<ContinuousChromosome, TIndividual, TParentsPair>
         where TIndividual : IIndividual<ContinuousChromosome>
         where TParentsPair : IParentsPair<ContinuousChromosome, TIndividual>
@@ -49,7 +48,7 @@ namespace EvoMice.Genetic.VectorChromosome.Continuous.Crossover
             {
                 double min = Math.Min(motherChromosome[i].Value, fatherChromosome[i].Value);
                 double max = Math.Max(motherChromosome[i].Value, fatherChromosome[i].Value);
-                child[i].Value=min + (max - min) * (Util.Random.NextDouble() * c - Alpha);
+                child[i].Value = min + (max - min) * (Util.Random.NextDouble() * c - Alpha);
             }
 
             List<ContinuousChromosome> result = new List<ContinuousChromosome>(1);

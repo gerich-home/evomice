@@ -21,7 +21,7 @@ namespace EvoMice.Genetic
         /// <param name="fitnessFunction">Функция приспособленности для оценки индивида</param>
         /// <returns>Индивид</returns>
         TIndividual CreateIndividual(
-            TChromosome chromosome, 
+            TChromosome chromosome,
             TFitnessFunction fitnessFunction);
     }
 }

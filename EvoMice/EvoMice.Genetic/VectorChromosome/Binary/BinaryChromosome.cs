@@ -14,7 +14,7 @@ namespace EvoMice.Genetic.VectorChromosome.Binary
         /// <summary>
         /// Локусы хромосомы
         /// </summary>
-        protected BinaryLocus[] Locuses{ get; set; }
+        protected BinaryLocus[] Locuses { get; set; }
 
         /// <summary>
         /// Бинарная хромосома
