@@ -69,6 +69,10 @@ namespace EvoMice.Genetic.VectorChromosome.Binary
 
         #region ICopyable<BinaryChromosome> Members
 
+        /// <summary>
+        /// Создаёт копию хромосомы
+        /// </summary>
+        /// <returns>Копия хромосомы</returns>
         public BinaryChromosome Copy()
         {
             return new BinaryChromosome(this);

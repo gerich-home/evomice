@@ -7,7 +7,7 @@ using EvoMice.Neuro.Neurons;
 using EvoMice.Neuro.Synapses;
 
 using EvoMice.Genetic;
-using EvoMice.Genetic.Bkreeding;
+using EvoMice.Genetic.Breeding;
 using EvoMice.Genetic.ContinueCondition;
 using EvoMice.Genetic.ReproductionStrategy;
 using EvoMice.Genetic.Selection;

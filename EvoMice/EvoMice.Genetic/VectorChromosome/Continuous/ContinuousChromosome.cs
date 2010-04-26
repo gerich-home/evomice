@@ -84,6 +84,10 @@ namespace EvoMice.Genetic.VectorChromosome.Continuous
 
         #region ICopyable<ContinuousChromosome> Members
 
+        /// <summary>
+        /// Создаёт копию хромосомы
+        /// </summary>
+        /// <returns>Копия хромосомы</returns>
         public ContinuousChromosome Copy()
         {
             return new ContinuousChromosome(this);
