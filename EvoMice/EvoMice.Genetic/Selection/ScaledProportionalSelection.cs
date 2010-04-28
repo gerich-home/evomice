@@ -5,35 +5,42 @@ using System.Text;
 namespace EvoMice.Genetic.Selection
 {
     /// <summary>
-    /// Отбор методом рулетки
+    /// Пропорциональная селекция с линейным динамическим масштабированием
     /// </summary>
     /// <typeparam name="TChromosome">Тип хромосомы индивида</typeparam>
     /// <typeparam name="TIndividual">Тип индивида</typeparam>
-    public class RouletteSelection<TChromosome, TIndividual> :
-        ISelection<TChromosome, TIndividual>
+    /// <typeparam name="TSelector">Тип алгоритма отбора особей</typeparam>
+    public class ScaledProportionalSelection<TChromosome, TIndividual, TSelector> :
+        Selection<TChromosome, TIndividual, TSelector>
         where TIndividual : IIndividual<TChromosome>
+        where TSelector : ISelector<TChromosome, TIndividual>
     {
         /// <summary>
-        /// Математичкое ожидание числа копий самой приспособленной особи
+        /// Математическое ожидание числа копий самой приспособленной особи
         /// </summary>
         public double c { get; protected set; }
 
         /// <summary>
-        /// Отбор методом рулетки
+        /// Пропорциональная селекция с линейным динамическим масштабированием
         /// </summary>
-        /// <param name="c">Математичкое ожидание числа копий самой приспособленной особи</param>
-        public RouletteSelection(double c)
+        /// <param name="c">Математическое ожидание числа копий самой приспособленной особи</param>
+        /// <param name="selector">Алгоритм отбора особей</param>
+        public ScaledProportionalSelection(double c, TSelector selector) :
+            base(selector)
         {
             this.c = c;
         }
 
-        #region ISelection<TChromosome,TIndividual> Members
-
-        IList<TIndividual> ISelection<TChromosome, TIndividual>.Select(IList<TIndividual> reproductionGroup, int count)
+        /// <summary>
+        /// Произвести селекцию
+        /// </summary>
+        /// <param name="reproductionGroup">Репродукционное множество</param>
+        /// <param name="count">Число необходимых индивидов</param>
+        /// <returns>Отобранные особи</returns>
+        protected override IList<TIndividual> DoSelection(IList<TIndividual> reproductionGroup, int count)
         {
-            List<TIndividual> selected = new List<TIndividual>(count);
-
             int rCount = reproductionGroup.Count;
+            List<double> ranks = new List<double>(rCount);
 
             double a;
             double b;
@@ -51,7 +58,8 @@ namespace EvoMice.Genetic.Selection
 
             if (minFitness == aveFitness || aveFitness == -maxFitness)
             {
-                for (int i = 0; i < count; i++)
+                List<TIndividual> selected = new List<TIndividual>();
+                for (int i = 0; i < rCount; i++)
                     selected.Add(reproductionGroup[Util.Random.Next(rCount)]);
                 return selected;
             }
@@ -66,30 +74,10 @@ namespace EvoMice.Genetic.Selection
                 b = aveFitness * minFitness / (aveFitness - minFitness);
             }
 
-            double[] probability = new double[rCount];
-
-            probability[0] = a * reproductionGroup[0].Fitness + b;
-            for (int i = 1; i < rCount; i++)
-                probability[i] = probability[i - 1] + a * reproductionGroup[i].Fitness + b;
-
-            double lastFitness = probability[rCount - 1];
             for (int i = 0; i < rCount; i++)
-                probability[i] /= lastFitness;
+                ranks.Add(a * reproductionGroup[i].Fitness + b);
 
-            for (int i = 0; i < count; i++)
-            {
-                double r = Util.Random.NextDouble();
-                for (int j = 0; j < rCount; j++)
-                    if (r < probability[j])
-                    {
-                        selected.Add(reproductionGroup[j]);
-                        break;
-                    }
-            }
-
-            return selected;
+            return Selector.Select(reproductionGroup, ranks, count);
         }
-
-        #endregion
     }
 }

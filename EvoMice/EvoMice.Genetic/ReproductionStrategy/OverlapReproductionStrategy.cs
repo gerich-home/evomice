@@ -43,7 +43,7 @@ namespace EvoMice.Genetic.ReproductionStrategy
         {
             List<TIndividual> newPopulation = new List<TIndividual>(population.Count);
 
-            TIndividual[] sortedPopulation = Util.PopulationSorter.SortPopulation<TChromosome, TIndividual>(population);
+            IList<TIndividual> sortedPopulation = Util.PopulationSorter.SortPopulation<TChromosome, TIndividual>(population);
 
             int gCount = (int)(g * population.Count);
             for (int i = 0; i < gCount; i++)

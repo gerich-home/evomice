@@ -13,16 +13,17 @@ namespace EvoMice.Genetic.Util
         /// <typeparam name="TIndividual">Тип индивида</typeparam>
         /// <param name="population">Популяция</param>
         /// <returns>Отсортированная популяция</returns>
-        public static TIndividual[] SortPopulation<TChromosome, TIndividual>(IList<TIndividual> population)
+        public static IList<TIndividual> SortPopulation<TChromosome, TIndividual>(IList<TIndividual> population)
             where TIndividual : IIndividual<TChromosome>
         {
-            TIndividual[] sortedPopulation = new TIndividual[population.Count];
-            population.CopyTo(sortedPopulation, 0);
+
+            List<TIndividual> sortedPopulation = new List<TIndividual>(population.Count);
+            sortedPopulation.AddRange(population);
             QSort<TChromosome, TIndividual>(sortedPopulation, 0, population.Count - 1);
             return sortedPopulation;
         }
 
-        private static void QSort<TChromosome, TIndividual>(TIndividual[] population, int left, int right)
+        private static void QSort<TChromosome, TIndividual>(IList<TIndividual> population, int left, int right)
             where TIndividual : IIndividual<TChromosome>
         {
             int l = left;

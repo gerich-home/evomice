@@ -1,13 +1,8 @@
-﻿Продумать алгоритмы селекции(то есть разделить селекцию
-на выбор вероятностей или рангов для особей и вероятностный отбор)
-
-Добавить:
+﻿Добавить:
 EvoMice.Genetic.Breeding.NegativeAssociativeMating
 EvoMice.Genetic.Breeding.SelectingBreeding
 
-EvoMice.Genetic.Selection.Selection
-EvoMice.Genetic.Selection.LinearRangeSelection
-EvoMice.Genetic.Selection.NonLinearRangeSelection
+EvoMice.Genetic.Selection.NonLinearRankSelection
 EvoMice.Genetic.Selection.BoltzmannSelection
 EvoMice.Genetic.Selection.PowerLawSelection
 

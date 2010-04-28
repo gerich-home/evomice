@@ -52,7 +52,7 @@ namespace EvoMice.Genetic.Breeding
 
         IList<TParentsPair> IBreeding<TChromosome, TIndividual, TParentsPair>.Select(IList<TIndividual> population)
         {
-            TIndividual[] sortedPopulation =
+            IList<TIndividual> sortedPopulation =
                 Util.PopulationSorter.SortPopulation<TChromosome, TIndividual>(
                     population
                 );

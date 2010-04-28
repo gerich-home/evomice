@@ -52,6 +52,11 @@
     <Compile Include="ReproductionStrategy\OverlapReproductionStrategy.cs" />
     <Compile Include="Selection\BTournamentSelection.cs" />
     <Compile Include="Selection\BinaryTournamentSelection.cs" />
+    <Compile Include="Selection\RankSelection.cs" />
+    <Compile Include="Selection\ISelector.cs" />
+    <Compile Include="Selection.cs" />
+    <Compile Include="Selection\ScaledProportionalSelection.cs" />
+    <Compile Include="Selection\Selector\RouletteSelector.cs" />
     <Compile Include="Util\PopulationSorter.cs" />
     <Compile Include="VectorChromosome\Binary\BinaryPopulationInitializer.cs" />
     <Compile Include="VectorChromosome\Binary\HammingDistance.cs" />
@@ -89,7 +94,6 @@
     <Compile Include="VectorChromosome\Mutation\Saltation.cs" />
     <Compile Include="VectorChromosome\Mutation\PointMutation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Selection\RouletteSelection.cs" />
     <Compile Include="Util\Random.cs" />
     <Compile Include="VectorChromosome\Binary\BinaryChromosome.cs" />
   </ItemGroup>

@@ -11,6 +11,7 @@ using EvoMice.Genetic.Breeding;
 using EvoMice.Genetic.ContinueCondition;
 using EvoMice.Genetic.ReproductionStrategy;
 using EvoMice.Genetic.Selection;
+using EvoMice.Genetic.Selection.Selector;
 using EvoMice.Genetic.Util;
 using EvoMice.Genetic.VectorChromosome;
 using EvoMice.Genetic.VectorChromosome.Binary;
@@ -80,8 +81,9 @@ namespace EvoMice
                     new ElitistReproductionStrategy<ContinuousChromosome, Individual<ContinuousChromosome>, ISelection<ContinuousChromosome, Individual<ContinuousChromosome>>>
                         (0.2,
                 //new BTournamentSelection<ContinuousChromosome,Individual<ContinuousChromosome>>(4)
-                        new RouletteSelection<ContinuousChromosome, Individual<ContinuousChromosome>>
-                            (2)
+                        new ScaledProportionalSelection<ContinuousChromosome, Individual<ContinuousChromosome>,ISelector<ContinuousChromosome,Individual<ContinuousChromosome>>>
+                            (2,
+                            new RouletteSelector<ContinuousChromosome,Individual<ContinuousChromosome>>())
                         ),
                     new ContinuousPopulationInitializer
                          (500, 2, -20, 20),

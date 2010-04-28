@@ -45,7 +45,7 @@ namespace EvoMice.Genetic.ReproductionStrategy
 
             if (reproductionGroup.Count > 0)
             {
-                TIndividual[] sortedPopulation = Util.PopulationSorter.SortPopulation<TChromosome, TIndividual>(population);
+                IList<TIndividual> sortedPopulation = Util.PopulationSorter.SortPopulation<TChromosome, TIndividual>(population);
 
                 newPopulation.Add(sortedPopulation[0]);
 
