@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace EvoMice.Genetic.VectorChromosome.Continuous.Mutation
 {

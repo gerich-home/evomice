@@ -1,24 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-
-using EvoMice.Neuro;
-using EvoMice.Neuro.Neurons;
-using EvoMice.Neuro.Synapses;
-
 using EvoMice.Genetic;
 using EvoMice.Genetic.Breeding;
 using EvoMice.Genetic.ContinueCondition;
 using EvoMice.Genetic.ReproductionStrategy;
 using EvoMice.Genetic.Selection;
 using EvoMice.Genetic.Selection.Selector;
-using EvoMice.Genetic.Util;
-using EvoMice.Genetic.VectorChromosome;
-using EvoMice.Genetic.VectorChromosome.Binary;
 using EvoMice.Genetic.VectorChromosome.Continuous;
 using EvoMice.Genetic.VectorChromosome.Continuous.Crossover;
-using EvoMice.Genetic.VectorChromosome.Crossover;
 using EvoMice.Genetic.VectorChromosome.Mutation;
+using EvoMice.Neuro;
+using EvoMice.Neuro.Neurons;
+using EvoMice.Neuro.Synapses;
 
 namespace EvoMice
 {

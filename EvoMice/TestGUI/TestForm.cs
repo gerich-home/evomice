@@ -1,25 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Text;
+using System.Threading;
 using System.Windows.Forms;
-
 using EvoMice.Genetic;
 using EvoMice.Genetic.Breeding;
 using EvoMice.Genetic.ContinueCondition;
 using EvoMice.Genetic.ReproductionStrategy;
 using EvoMice.Genetic.Selection;
 using EvoMice.Genetic.Selection.Selector;
-using EvoMice.Genetic.Util;
-using EvoMice.Genetic.VectorChromosome;
-using EvoMice.Genetic.VectorChromosome.Binary;
 using EvoMice.Genetic.VectorChromosome.Continuous;
 using EvoMice.Genetic.VectorChromosome.Continuous.Crossover;
 using EvoMice.Genetic.VectorChromosome.Continuous.Mutation;
-using EvoMice.Genetic.VectorChromosome.Crossover;
-using EvoMice.Genetic.VectorChromosome.Mutation;
-using System.Threading;
 
 namespace TestGUI
 {
@@ -29,7 +20,6 @@ namespace TestGUI
                 IFitnessFunction<ContinuousChromosome>
                 >;
 
-    using Individual = Individual<ContinuousChromosome>;
 
     public partial class TestForm : Form
     {

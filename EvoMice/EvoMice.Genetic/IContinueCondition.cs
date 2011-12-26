@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace EvoMice.Genetic
 {
@@ -9,7 +7,7 @@ namespace EvoMice.Genetic
     /// </summary>
     /// <typeparam name="TChromosome">Тип хромосомы индивида</typeparam>
     /// <typeparam name="TIndividual">Тип индивида</typeparam>
-    public interface IContinueCondition<TChromosome, TIndividual>
+    public interface IContinueCondition<out TChromosome, TIndividual>
         where TIndividual : IIndividual<TChromosome>
     {
         /// <summary>
