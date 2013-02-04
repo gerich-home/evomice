@@ -60,8 +60,7 @@ namespace EvoMice
             var ga =
                 new GeneticAlgorithm<ContinuousChromosome,
                     Individual<ContinuousChromosome>,
-                    ParentsPair<ContinuousChromosome, Individual<ContinuousChromosome>>,
-                    IFitnessFunction<ContinuousChromosome>
+                    ParentsPair<ContinuousChromosome, Individual<ContinuousChromosome>>
                     >(
                     new ElitistReproductionStrategy<ContinuousChromosome, Individual<ContinuousChromosome>, ISelection<ContinuousChromosome, Individual<ContinuousChromosome>>>
                         (0.2,
@@ -74,7 +73,7 @@ namespace EvoMice
                          (500, 2, -20, 20),
                     new GenerationContinueCondition<ContinuousChromosome, Individual<ContinuousChromosome>>
                         (20),
-                    new IndividualFactory<ContinuousChromosome, IFitnessFunction<ContinuousChromosome>>(),
+                    new IndividualFactory<ContinuousChromosome>(),
                     new Panmixia<ContinuousChromosome, Individual<ContinuousChromosome>, ParentsPair<ContinuousChromosome, Individual<ContinuousChromosome>>, ParentsPairFactory<ContinuousChromosome, Individual<ContinuousChromosome>>>
                         (new ParentsPairFactory<ContinuousChromosome, Individual<ContinuousChromosome>>(),
                         50),

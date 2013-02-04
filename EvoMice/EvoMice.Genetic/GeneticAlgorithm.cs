@@ -9,12 +9,10 @@ namespace EvoMice.Genetic
     /// <typeparam name="TChromosome">Тип хромосомы индивида</typeparam>
     /// <typeparam name="TIndividual">Тип индивида</typeparam>
     /// <typeparam name="TParentsPair">Тип родительской пары</typeparam>
-    /// <typeparam name="TFitnessFunction">Тип функции приспособленности</typeparam>
-    public class GeneticAlgorithm<TChromosome, TIndividual, TParentsPair, TFitnessFunction> :
-        IGeneticAlgorithm<TChromosome, TIndividual, TFitnessFunction>
+    public class GeneticAlgorithm<TChromosome, TIndividual, TParentsPair> :
+        IGeneticAlgorithm<TChromosome, TIndividual>
         where TIndividual : IIndividual<TChromosome>
         where TParentsPair : IParentsPair<TChromosome, TIndividual>
-        where TFitnessFunction : IFitnessFunction<TChromosome>
     {
         /// <summary>
         /// Стратегия формирования следующей популяции
@@ -34,7 +32,7 @@ namespace EvoMice.Genetic
         /// <summary>
         /// Создатель индивида
         /// </summary>
-        public IIndividualFactory<TChromosome, TIndividual, TFitnessFunction> IndividualFactory { get; protected set; }
+        public IIndividualFactory<TChromosome, TIndividual> IndividualFactory { get; protected set; }
 
         /// <summary>
         /// Система подбора родительских пар
@@ -65,7 +63,7 @@ namespace EvoMice.Genetic
             IReproductionStrategy<TChromosome, TIndividual> strategy,
             IPopulationInitializer<TChromosome> populationInitializer,
             IContinueCondition<TChromosome, TIndividual> continueCondition,
-            IIndividualFactory<TChromosome, TIndividual, TFitnessFunction> individualFactory,
+            IIndividualFactory<TChromosome, TIndividual> individualFactory,
             IBreeding<TChromosome, TIndividual, TParentsPair> breeding,
             ICrossover<TChromosome, TIndividual, TParentsPair> crossover,
             IMutation<TChromosome> mutation
@@ -87,7 +85,7 @@ namespace EvoMice.Genetic
         /// </summary>
         /// <param name="fitnessFunction">Функция приспособленности</param>
         /// <returns>Лучшее решение, найденное генетическим алгоритмом</returns>
-        public TIndividual Run(TFitnessFunction fitnessFunction)
+        public TIndividual Run(IFitnessFunction<TChromosome> fitnessFunction)
         {
             int generation = 0;
 

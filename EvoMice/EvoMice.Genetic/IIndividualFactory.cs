@@ -6,10 +6,8 @@ namespace EvoMice.Genetic
     /// </summary>
     /// <typeparam name="TChromosome">Тип хромосомы индивида</typeparam>
     /// <typeparam name="TIndividual">Тип индивида</typeparam>
-    /// <typeparam name="TFitnessFunction">Тип функции приспособленности</typeparam>
-    public interface IIndividualFactory<in TChromosome, out TIndividual, in TFitnessFunction>
+    public interface IIndividualFactory<TChromosome, out TIndividual>
         where TIndividual : IIndividual<TChromosome>
-        where TFitnessFunction : IFitnessFunction<TChromosome>
     {
         /// <summary>
         /// Создаёт нового индивида
@@ -19,6 +17,6 @@ namespace EvoMice.Genetic
         /// <returns>Индивид</returns>
         TIndividual CreateIndividual(
             TChromosome chromosome,
-            TFitnessFunction fitnessFunction);
+            IFitnessFunction<TChromosome> fitnessFunction);
     }
 }

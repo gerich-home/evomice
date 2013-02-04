@@ -73,7 +73,7 @@ namespace TestGUI
         }
 
         private class GUIIndividualFactory :
-            IIndividualFactory<ContinuousChromosome, Individual<ContinuousChromosome>, IFitnessFunction<ContinuousChromosome>>
+            IIndividualFactory<ContinuousChromosome, Individual<ContinuousChromosome>>
         {
             private TestForm TestForm { get; set; }
 
@@ -84,7 +84,7 @@ namespace TestGUI
 
             #region IIndividualFactory<ContinuousChromosome,Individual<ContinuousChromosome>,IFitnessFunction<ContinuousChromosome>> Members
 
-            Individual<ContinuousChromosome> IIndividualFactory<ContinuousChromosome, Individual<ContinuousChromosome>, IFitnessFunction<ContinuousChromosome>>.CreateIndividual(ContinuousChromosome chromosome, IFitnessFunction<ContinuousChromosome> fitnessFunction)
+            Individual<ContinuousChromosome> IIndividualFactory<ContinuousChromosome, Individual<ContinuousChromosome>>.CreateIndividual(ContinuousChromosome chromosome, IFitnessFunction<ContinuousChromosome> fitnessFunction)
             {
                 TestForm.DrawChromosome(chromosome, TestForm.bmp, Color.Black);
                 return new Individual<ContinuousChromosome>(chromosome, fitnessFunction);
@@ -118,8 +118,7 @@ namespace TestGUI
             var ga = new GeneticAlgorithm<
                 ContinuousChromosome,
                 Individual<ContinuousChromosome>,
-                ParentsPair<ContinuousChromosome, Individual<ContinuousChromosome>>,
-                IFitnessFunction<ContinuousChromosome>
+                ParentsPair<ContinuousChromosome, Individual<ContinuousChromosome>>
                 >(
                     new ElitistReproductionStrategy<ContinuousChromosome, Individual<ContinuousChromosome>, ISelection<ContinuousChromosome, Individual<ContinuousChromosome>>>
                         (0.2,

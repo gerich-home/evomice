@@ -5,14 +5,12 @@ namespace EvoMice.Genetic
     /// Создатель индивида
     /// </summary>
     /// <typeparam name="TChromosome">Тип хромосомы индивида</typeparam>
-    /// <typeparam name="TFitnessFunction">Тип функции приспособленности</typeparam>
-    public class IndividualFactory<TChromosome, TFitnessFunction> :
-        IIndividualFactory<TChromosome, Individual<TChromosome>, TFitnessFunction>
-        where TFitnessFunction : IFitnessFunction<TChromosome>
+    public class IndividualFactory<TChromosome> :
+        IIndividualFactory<TChromosome, Individual<TChromosome>>
     {
-        #region IIndividualFactory<TChromosome,Individual<TChromosome>,TFitnessFunction> Members
+        #region IIndividualFactory<TChromosome,Individual<TChromosome>> Members
 
-        Individual<TChromosome> IIndividualFactory<TChromosome, Individual<TChromosome>, TFitnessFunction>.CreateIndividual(TChromosome chromosome, TFitnessFunction fitnessFunction)
+        Individual<TChromosome> IIndividualFactory<TChromosome, Individual<TChromosome>>.CreateIndividual(TChromosome chromosome, IFitnessFunction<TChromosome> fitnessFunction)
         {
             return new Individual<TChromosome>(chromosome, fitnessFunction);
         }
