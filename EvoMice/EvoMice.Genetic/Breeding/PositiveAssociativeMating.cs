@@ -5,15 +5,9 @@ namespace EvoMice.Genetic.Breeding
     /// <summary>
     /// Позитивное ассоциативное скрещивание
     /// </summary>
-    /// <typeparam name="TChromosome">Тип хромосомы индивида</typeparam>
-    /// <typeparam name="TIndividual">Тип индивида</typeparam>
     /// <typeparam name="TParentsPair">Тип родительской пары</typeparam>
-    /// <typeparam name="TParentsPairFactory">Создатель родительской пары</typeparam>
-    public class PositiveAssociativeMating<TChromosome, TIndividual, TParentsPair, TParentsPairFactory> :
-        IBreeding<TChromosome, TIndividual, TParentsPair>
-        where TIndividual : IIndividual<TChromosome>
-        where TParentsPair : IParentsPair<TChromosome, TIndividual>
-        where TParentsPairFactory : IParentsPairFactory<TChromosome, TIndividual, TParentsPair>
+    public class PositiveAssociativeMating<TParentsPair>
+        : IBreeding<IIndividual<object>, TParentsPair>
     {
         /// <summary>
         /// Максимальная разница между приспособленностями скрещиваемых особей
@@ -28,7 +22,7 @@ namespace EvoMice.Genetic.Breeding
         /// <summary>
         /// Создатель родительской пары
         /// </summary>
-        public TParentsPairFactory ParentsPairFactory { get; protected set; }
+        public IParentsPairFactory<IIndividual<object>, TParentsPair> ParentsPairFactory { get; protected set; }
 
         /// <summary>
         /// Позитивное ассоциативное скрещивание
@@ -37,7 +31,7 @@ namespace EvoMice.Genetic.Breeding
         /// <param name="maxDelta">Максимальная разница между приспособленностями скрещиваемых особей</param>
         /// <param name="pairCount">Число создаваемых пар</param>
         public PositiveAssociativeMating(
-            TParentsPairFactory parentsPairFactory,
+            IParentsPairFactory<IIndividual<object>, TParentsPair> parentsPairFactory,
             double maxDelta,
             int pairCount)
         {
@@ -46,12 +40,12 @@ namespace EvoMice.Genetic.Breeding
             ParentsPairFactory = parentsPairFactory;
         }
 
-        #region IBreeding<TChromosome,TIndividual,TParentsPair> Members
+        #region IBreeding<TChromosome,IIndividual<TChromosome>,TParentsPair> Members
 
-        IReadOnlyList<TParentsPair> IBreeding<TChromosome, TIndividual, TParentsPair>.Select(IReadOnlyList<TIndividual> population)
+        IReadOnlyList<TParentsPair> IBreeding<IIndividual<object>, TParentsPair>.Select(IReadOnlyList<IIndividual<object>> population)
         {
             var sortedPopulation =
-                Util.PopulationSorter.SortPopulation<TChromosome, TIndividual>(
+                Util.PopulationSorter.SortPopulation<object, IIndividual<object>>(
                     population
                 );
 

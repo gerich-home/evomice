@@ -12,12 +12,12 @@ namespace EvoMice.Genetic
     public class GeneticAlgorithm<TChromosome, TIndividual, TParentsPair> :
         IGeneticAlgorithm<TChromosome, TIndividual>
         where TIndividual : IIndividual<TChromosome>
-        where TParentsPair : IParentsPair<TChromosome, TIndividual>
+        where TParentsPair : IParentsPair<TIndividual>
     {
         /// <summary>
         /// Стратегия формирования следующей популяции
         /// </summary>
-        public IReproductionStrategy<TChromosome, TIndividual> Strategy { get; protected set; }
+        public IReproductionStrategy<TIndividual> Strategy { get; protected set; }
 
         /// <summary>
         /// Инициализатор первой популяции
@@ -27,7 +27,7 @@ namespace EvoMice.Genetic
         /// <summary>
         /// Условие продолжения генетического алгоритма
         /// </summary>
-        public IContinueCondition<TChromosome, TIndividual> ContinueCondition { get; protected set; }
+        public IContinueCondition<TIndividual> ContinueCondition { get; protected set; }
 
         /// <summary>
         /// Создатель индивида
@@ -37,12 +37,12 @@ namespace EvoMice.Genetic
         /// <summary>
         /// Система подбора родительских пар
         /// </summary>
-        public IBreeding<TChromosome, TIndividual, TParentsPair> Breeding { get; protected set; }
+        public IBreeding<TIndividual, TParentsPair> Breeding { get; protected set; }
 
         /// <summary>
         /// Кроссовер
         /// </summary>
-        public ICrossover<TChromosome, TIndividual, TParentsPair> Crossover { get; protected set; }
+        public ICrossover<TChromosome, TParentsPair> Crossover { get; protected set; }
 
         /// <summary>
         /// Мутация
@@ -60,12 +60,12 @@ namespace EvoMice.Genetic
         /// <param name="crossover">Кроссовер</param>
         /// <param name="mutation">Мутация</param>
         public GeneticAlgorithm(
-            IReproductionStrategy<TChromosome, TIndividual> strategy,
+            IReproductionStrategy<TIndividual> strategy,
             IPopulationInitializer<TChromosome> populationInitializer,
-            IContinueCondition<TChromosome, TIndividual> continueCondition,
+            IContinueCondition<TIndividual> continueCondition,
             IIndividualFactory<TChromosome, TIndividual> individualFactory,
-            IBreeding<TChromosome, TIndividual, TParentsPair> breeding,
-            ICrossover<TChromosome, TIndividual, TParentsPair> crossover,
+            IBreeding<TIndividual, TParentsPair> breeding,
+            ICrossover<TChromosome, TParentsPair> crossover,
             IMutation<TChromosome> mutation
             )
         {

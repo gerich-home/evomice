@@ -4,10 +4,8 @@ namespace EvoMice.Genetic
     /// <summary>
     /// Родительская пара
     /// </summary>
-    /// <typeparam name="TChromosome">Тип хромосомы индивида</typeparam>
     /// <typeparam name="TIndividual">Тип индивида</typeparam>
-    public interface IParentsPair<TChromosome, out TIndividual>
-        where TIndividual : IIndividual<TChromosome>
+    public interface IParentsPair<out TIndividual>
     {
         /// <summary>
         /// 1-ая особь родительской пары

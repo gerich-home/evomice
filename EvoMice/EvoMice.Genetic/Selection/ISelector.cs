@@ -5,10 +5,8 @@ namespace EvoMice.Genetic.Selection
     /// <summary>
     /// Алгоритм отбора особей на основе сопоставленных им рангам или вероятностям
     /// </summary>
-    /// <typeparam name="TChromosome">Тип хромосомы индивида</typeparam>
     /// <typeparam name="TIndividual">Тип индивида</typeparam>
-    public interface ISelector<TChromosome, TIndividual>
-        where TIndividual : IIndividual<TChromosome>
+    public interface ISelector<TIndividual>
     {
         /// <summary>
         /// Отбор особей на основе сопоставленных им рангам или вероятностям

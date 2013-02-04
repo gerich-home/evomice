@@ -5,10 +5,8 @@ namespace EvoMice.Genetic
     /// <summary>
     /// Система отбора(селекции) особей из репродукционного множества
     /// </summary>
-    /// <typeparam name="TChromosome">Тип хромосомы индивида</typeparam>
     /// <typeparam name="TIndividual">Тип индивида</typeparam>
-    public interface ISelection<TChromosome, TIndividual>
-        where TIndividual : IIndividual<TChromosome>
+    public interface ISelection<TIndividual>
     {
         /// <summary>
         /// Отбор особей

@@ -10,9 +10,9 @@ namespace EvoMice.Genetic.Selection
     /// <typeparam name="TIndividual">Тип индивида</typeparam>
     /// <typeparam name="TSelector">Тип алгоритма отбора особей</typeparam>
     public class ScaledProportionalSelection<TChromosome, TIndividual, TSelector> :
-        Selection<TChromosome, TIndividual, TSelector>
+        Selection<TIndividual, TSelector>
         where TIndividual : IIndividual<TChromosome>
-        where TSelector : ISelector<TChromosome, TIndividual>
+        where TSelector : ISelector<TIndividual>
     {
         /// <summary>
         /// Математическое ожидание числа копий самой приспособленной особи

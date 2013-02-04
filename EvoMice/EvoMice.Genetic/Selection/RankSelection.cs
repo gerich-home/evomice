@@ -9,9 +9,9 @@ namespace EvoMice.Genetic.Selection
     /// <typeparam name="TIndividual">Тип индивида</typeparam>
     /// <typeparam name="TSelector">Тип алгоритма отбора особей</typeparam>
     public class RankSelection<TChromosome, TIndividual, TSelector> :
-        Selection<TChromosome, TIndividual, TSelector>
+        Selection<TIndividual, TSelector>
         where TIndividual : IIndividual<TChromosome>
-        where TSelector : ISelector<TChromosome, TIndividual>
+        where TSelector : ISelector<TIndividual>
     {
         /// <summary>
         /// Верхняя граница ожидаемого числа копий самой приспособленной особи

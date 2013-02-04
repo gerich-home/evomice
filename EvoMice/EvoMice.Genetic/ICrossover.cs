@@ -6,11 +6,8 @@ namespace EvoMice.Genetic
     /// Скрещивание особей
     /// </summary>
     /// <typeparam name="TChromosome">Тип хромосомы индивида</typeparam>
-    /// <typeparam name="TIndividual">Тип индивида</typeparam>
     /// <typeparam name="TParentsPair">Тип родительской пары</typeparam>
-    public interface ICrossover<TChromosome, TIndividual, in TParentsPair>
-        where TIndividual : IIndividual<TChromosome>
-        where TParentsPair : IParentsPair<TChromosome, TIndividual>
+    public interface ICrossover<TChromosome, in TParentsPair>
     {
         /// <summary>
         /// Производит скрещивание особей

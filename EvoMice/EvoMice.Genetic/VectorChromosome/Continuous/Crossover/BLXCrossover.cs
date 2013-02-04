@@ -9,9 +9,9 @@ namespace EvoMice.Genetic.VectorChromosome.Continuous.Crossover
     /// <typeparam name="TIndividual">Тип индивида</typeparam>
     /// <typeparam name="TParentsPair">Тип родительской пары</typeparam>
     public class BLXCrossover<TIndividual, TParentsPair> :
-        Crossover<ContinuousChromosome, TIndividual, TParentsPair>
+        Crossover<ContinuousChromosome, TParentsPair>
         where TIndividual : IIndividual<ContinuousChromosome>
-        where TParentsPair : IParentsPair<ContinuousChromosome, TIndividual>
+        where TParentsPair : IParentsPair<TIndividual>
     {
         /// <summary>
         /// Величина разброса значений

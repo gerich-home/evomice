@@ -6,12 +6,12 @@ namespace EvoMice.Genetic.Selection.Selector
     /// Отбор методом рулетки
     /// </summary>
     public class RouletteSelector<TChromosome, TIndividual> :
-        ISelector<TChromosome, TIndividual>
+        ISelector<TIndividual>
         where TIndividual : IIndividual<TChromosome>
     {
         #region ISelector<TChromosome,TIndividual> Members
 
-        IReadOnlyList<TIndividual> ISelector<TChromosome, TIndividual>.Select(IReadOnlyList<TIndividual> reproductionGroup, IReadOnlyList<double> ranks, int count)
+        IReadOnlyList<TIndividual> ISelector<TIndividual>.Select(IReadOnlyList<TIndividual> reproductionGroup, IReadOnlyList<double> ranks, int count)
         {
             var selected = new List<TIndividual>(count);
 

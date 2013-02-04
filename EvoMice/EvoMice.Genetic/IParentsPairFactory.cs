@@ -4,12 +4,9 @@ namespace EvoMice.Genetic
     /// <summary>
     /// Создатель родительской пары
     /// </summary>
-    /// <typeparam name="TChromosome">Тип хромосомы индивида</typeparam>
     /// <typeparam name="TIndividual">Тип индивида</typeparam>
     /// <typeparam name="TParentsPair">Тип родительской пары</typeparam>
-    public interface IParentsPairFactory<TChromosome, in TIndividual, out TParentsPair>
-        where TIndividual : IIndividual<TChromosome>
-        where TParentsPair : IParentsPair<TChromosome, TIndividual>
+    public interface IParentsPairFactory<in TIndividual, out TParentsPair>
     {
         /// <summary>
         /// Создаёт новую родительскую пару

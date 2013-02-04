@@ -9,9 +9,9 @@ namespace EvoMice.Genetic.ReproductionStrategy
     /// <typeparam name="TIndividual">Тип индивида</typeparam>
     /// <typeparam name="TSelection">Тип отбора</typeparam>
     public class ElitistReproductionStrategy<TChromosome, TIndividual, TSelection> :
-        IReproductionStrategy<TChromosome, TIndividual>
+        IReproductionStrategy<TIndividual>
         where TIndividual : IIndividual<TChromosome>
-        where TSelection : ISelection<TChromosome, TIndividual>
+        where TSelection : ISelection<TIndividual>
     {
         /// <summary>
         /// Параметр перекрытия
@@ -37,7 +37,7 @@ namespace EvoMice.Genetic.ReproductionStrategy
 
         #region IReproductionStrategy<TChromosome,TIndividual> Members
 
-        IReadOnlyList<TIndividual> IReproductionStrategy<TChromosome, TIndividual>.NextGeneration(IReadOnlyList<TIndividual> population, IReadOnlyList<TIndividual> reproductionGroup)
+        IReadOnlyList<TIndividual> IReproductionStrategy<TIndividual>.NextGeneration(IReadOnlyList<TIndividual> population, IReadOnlyList<TIndividual> reproductionGroup)
         {
             var newPopulation = new List<TIndividual>(population.Count);
 

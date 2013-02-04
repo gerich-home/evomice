@@ -1,18 +1,14 @@
 ﻿using System.Collections.Generic;
-using EvoMice.Genetic.Selection;
 
 namespace EvoMice.Genetic
 {
     /// <summary>
     /// Селекция
     /// </summary>
-    /// <typeparam name="TChromosome">Тип хромосомы индивида</typeparam>
     /// <typeparam name="TIndividual">Тип индивида</typeparam>
     /// <typeparam name="TSelector">Тип алгоритма отбора особей</typeparam>
-    public abstract class Selection<TChromosome, TIndividual, TSelector> :
-        ISelection<TChromosome, TIndividual>
-        where TIndividual : IIndividual<TChromosome>
-        where TSelector : ISelector<TChromosome, TIndividual>
+    public abstract class Selection<TIndividual, TSelector>
+        : ISelection<TIndividual>
     {
         /// <summary>
         /// Алгоритм отбора особей
@@ -38,7 +34,7 @@ namespace EvoMice.Genetic
 
         #region ISelection<TChromosome,TIndividual> Members
 
-        IReadOnlyList<TIndividual> ISelection<TChromosome, TIndividual>.Select(IReadOnlyList<TIndividual> reproductionGroup, int count)
+        IReadOnlyList<TIndividual> ISelection<TIndividual>.Select(IReadOnlyList<TIndividual> reproductionGroup, int count)
         {
             if (count == 0)
                 return new List<TIndividual>(0);

@@ -6,12 +6,9 @@ namespace EvoMice.Genetic
     /// Вероятностный кроссовер
     /// </summary>
     /// <typeparam name="TChromosome">Тип хромосомы индивида</typeparam>
-    /// <typeparam name="TIndividual">Тип индивида</typeparam>
     /// <typeparam name="TParentsPair">Тип родительской пары</typeparam>
-    public abstract class Crossover<TChromosome, TIndividual, TParentsPair> :
-        ICrossover<TChromosome, TIndividual, TParentsPair>
-        where TIndividual : IIndividual<TChromosome>
-        where TParentsPair : IParentsPair<TChromosome, TIndividual>
+    public abstract class Crossover<TChromosome, TParentsPair>
+        : ICrossover<TChromosome, TParentsPair>
     {
         /// <summary>
         /// Вероятность кроссовера
@@ -37,7 +34,7 @@ namespace EvoMice.Genetic
 
         #region ICrossover<TChromosome,TIndividual,TParentsPair> Members
 
-        IReadOnlyList<TChromosome> ICrossover<TChromosome, TIndividual, TParentsPair>.Crossover(TParentsPair parentsPair)
+        IReadOnlyList<TChromosome> ICrossover<TChromosome, TParentsPair>.Crossover(TParentsPair parentsPair)
         {
             if (Util.Random.NextDouble() <= Probability)
                 return DoCrossover(parentsPair);

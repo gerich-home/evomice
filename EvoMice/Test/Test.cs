@@ -60,24 +60,24 @@ namespace EvoMice
             var ga =
                 new GeneticAlgorithm<ContinuousChromosome,
                     Individual<ContinuousChromosome>,
-                    ParentsPair<ContinuousChromosome, Individual<ContinuousChromosome>>
+                    ParentsPair<Individual<ContinuousChromosome>>
                     >(
-                    new ElitistReproductionStrategy<ContinuousChromosome, Individual<ContinuousChromosome>, ISelection<ContinuousChromosome, Individual<ContinuousChromosome>>>
+                    new ElitistReproductionStrategy<ContinuousChromosome, Individual<ContinuousChromosome>, ISelection<Individual<ContinuousChromosome>>>
                         (0.2,
                 //new BTournamentSelection<ContinuousChromosome,Individual<ContinuousChromosome>>(4)
-                        new ScaledProportionalSelection<ContinuousChromosome, Individual<ContinuousChromosome>,ISelector<ContinuousChromosome,Individual<ContinuousChromosome>>>
+                        new ScaledProportionalSelection<ContinuousChromosome, Individual<ContinuousChromosome>,ISelector<Individual<ContinuousChromosome>>>
                             (2,
                             new RouletteSelector<ContinuousChromosome,Individual<ContinuousChromosome>>())
                         ),
                     new ContinuousPopulationInitializer
                          (500, 2, -20, 20),
-                    new GenerationContinueCondition<ContinuousChromosome, Individual<ContinuousChromosome>>
+                    new GenerationContinueCondition<Individual<ContinuousChromosome>>
                         (20),
                     new IndividualFactory<ContinuousChromosome>(),
-                    new Panmixia<ContinuousChromosome, Individual<ContinuousChromosome>, ParentsPair<ContinuousChromosome, Individual<ContinuousChromosome>>, ParentsPairFactory<ContinuousChromosome, Individual<ContinuousChromosome>>>
-                        (new ParentsPairFactory<ContinuousChromosome, Individual<ContinuousChromosome>>(),
+                    new Panmixia<Individual<ContinuousChromosome>, ParentsPair<Individual<ContinuousChromosome>>>
+                        (new ParentsPairFactory<Individual<ContinuousChromosome>>(),
                         50),
-                    new BLXCrossover<Individual<ContinuousChromosome>, ParentsPair<ContinuousChromosome, Individual<ContinuousChromosome>>>
+                    new BLXCrossover<Individual<ContinuousChromosome>, ParentsPair<Individual<ContinuousChromosome>>>
                         (0.8, 0.2),
                     new PointMutation<ContinuousChromosome, ContinuousLocus>
                         (0.03)

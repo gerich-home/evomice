@@ -5,10 +5,8 @@ namespace EvoMice.Genetic
     /// <summary>
     /// Стратегия формирования следующего поколения
     /// </summary>
-    /// <typeparam name="TChromosome">Тип хромосомы индивида</typeparam>
     /// <typeparam name="TIndividual">Тип индивида</typeparam>
-    public interface IReproductionStrategy<TChromosome, TIndividual>
-        where TIndividual : IIndividual<TChromosome>
+    public interface IReproductionStrategy<TIndividual>
     {
         /// <summary>
         /// Сформировать следующее поколение

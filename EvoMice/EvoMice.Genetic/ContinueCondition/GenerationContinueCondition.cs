@@ -5,11 +5,9 @@ namespace EvoMice.Genetic.ContinueCondition
     /// <summary>
     /// Условие продолжения генетического алгоритма, основанное на числе поколений
     /// </summary>
-    /// <typeparam name="TChromosome">Тип хромосомы индивида</typeparam>
     /// <typeparam name="TIndividual">Тип индивида</typeparam>
-    public class GenerationContinueCondition<TChromosome, TIndividual> :
-        IContinueCondition<TChromosome, TIndividual>
-        where TIndividual : IIndividual<TChromosome>
+    public class GenerationContinueCondition<TIndividual>
+        : IContinueCondition<TIndividual>
     {
         /// <summary>
         /// Максимальное число поколений
@@ -27,7 +25,7 @@ namespace EvoMice.Genetic.ContinueCondition
 
         #region IContinueCondition<TChromosome,TIndividual> Members
 
-        bool IContinueCondition<TChromosome, TIndividual>.ShouldContinue(IReadOnlyList<TIndividual> population, int generation)
+        bool IContinueCondition<TIndividual>.ShouldContinue(IReadOnlyList<TIndividual> population, int generation)
         {
             return generation < MaxGenerations;
         }

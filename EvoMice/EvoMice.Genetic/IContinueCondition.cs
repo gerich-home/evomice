@@ -5,10 +5,8 @@ namespace EvoMice.Genetic
     /// <summary>
     /// Условие продолжения генетического алгоритма
     /// </summary>
-    /// <typeparam name="TChromosome">Тип хромосомы индивида</typeparam>
     /// <typeparam name="TIndividual">Тип индивида</typeparam>
-    public interface IContinueCondition<out TChromosome, in TIndividual>
-        where TIndividual : IIndividual<TChromosome>
+    public interface IContinueCondition<in TIndividual>
     {
         /// <summary>
         /// Следует ли продолжать работу генетического алгоритма

@@ -8,7 +8,7 @@ namespace EvoMice.Genetic.Selection
     /// <typeparam name="TChromosome">Тип хромосомы индивида</typeparam>
     /// <typeparam name="TIndividual">Тип индивида</typeparam>
     public class BTournamentSelection<TChromosome, TIndividual> :
-        ISelection<TChromosome, TIndividual>
+        ISelection<TIndividual>
         where TIndividual : IIndividual<TChromosome>
     {
         /// <summary>
@@ -27,7 +27,7 @@ namespace EvoMice.Genetic.Selection
 
         #region ISelection<TChromosome,TIndividual> Members
 
-        IReadOnlyList<TIndividual> ISelection<TChromosome, TIndividual>.Select(IReadOnlyList<TIndividual> reproductionGroup, int count)
+        IReadOnlyList<TIndividual> ISelection<TIndividual>.Select(IReadOnlyList<TIndividual> reproductionGroup, int count)
         {
             var selected = new List<TIndividual>(count);
 

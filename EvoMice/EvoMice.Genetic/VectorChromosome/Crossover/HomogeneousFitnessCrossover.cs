@@ -10,10 +10,10 @@ namespace EvoMice.Genetic.VectorChromosome.Crossover
     /// <typeparam name="TParentsPair">Тип родительской пары</typeparam>
     /// <typeparam name="TLocus">Тип локусов</typeparam>
     public class HomogeneousFitnessCrossover<TChromosome, TIndividual, TParentsPair, TLocus> :
-        Crossover<TChromosome, TIndividual, TParentsPair>
+        Crossover<TChromosome, TParentsPair>
         where TChromosome : IVectorChromosome<TLocus>, ICopyable<TChromosome>
         where TIndividual : IIndividual<TChromosome>
-        where TParentsPair : IParentsPair<TChromosome, TIndividual>
+        where TParentsPair : IParentsPair<TIndividual>
         where TLocus : ICopyable<TLocus>
     {
         /// <summary>

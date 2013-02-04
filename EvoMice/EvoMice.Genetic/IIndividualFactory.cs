@@ -7,7 +7,6 @@ namespace EvoMice.Genetic
     /// <typeparam name="TChromosome">Тип хромосомы индивида</typeparam>
     /// <typeparam name="TIndividual">Тип индивида</typeparam>
     public interface IIndividualFactory<TChromosome, out TIndividual>
-        where TIndividual : IIndividual<TChromosome>
     {
         /// <summary>
         /// Создаёт нового индивида
