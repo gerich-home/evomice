@@ -66,7 +66,7 @@ namespace EvoMice.Genetic.Breeding
 
         #region IBreeding<TChromosome,TIndividual,TParentsPair> Members
 
-        IList<TParentsPair> IBreeding<TChromosome, TIndividual, TParentsPair>.Select(IList<TIndividual> population)
+        IReadOnlyList<TParentsPair> IBreeding<TChromosome, TIndividual, TParentsPair>.Select(IReadOnlyList<TIndividual> population)
         {
             int pCount = population.Count;
             var pairs = new List<TParentsPair>(PairCount);
@@ -79,7 +79,7 @@ namespace EvoMice.Genetic.Breeding
                 if (secondInd >= firstInd)
                     secondInd++;
 
-                TIndividual best = population[secondInd];
+                var best = population[secondInd];
                 double bestDistance = ChromosomeDistance.Distance(
                     first.Chromosome, best.Chromosome);
 
@@ -89,7 +89,7 @@ namespace EvoMice.Genetic.Breeding
                     if (secondInd >= firstInd)
                         secondInd++;
 
-                    TIndividual second = population[secondInd];
+                    var second = population[secondInd];
                     double distance = ChromosomeDistance.Distance(
                         first.Chromosome, second.Chromosome);
                     if (distance < bestDistance)

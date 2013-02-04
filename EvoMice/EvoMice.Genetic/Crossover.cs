@@ -32,12 +32,12 @@ namespace EvoMice.Genetic
         /// </summary>
         /// <param name="parentsPair">Родительская пара</param>
         /// <returns>Потомки</returns>
-        protected abstract IList<TChromosome> DoCrossover(TParentsPair parentsPair);
+        protected abstract IReadOnlyList<TChromosome> DoCrossover(TParentsPair parentsPair);
 
 
         #region ICrossover<TChromosome,TIndividual,TParentsPair> Members
 
-        IList<TChromosome> ICrossover<TChromosome, TIndividual, TParentsPair>.Crossover(TParentsPair parentsPair)
+        IReadOnlyList<TChromosome> ICrossover<TChromosome, TIndividual, TParentsPair>.Crossover(TParentsPair parentsPair)
         {
             if (Util.Random.NextDouble() <= Probability)
                 return DoCrossover(parentsPair);

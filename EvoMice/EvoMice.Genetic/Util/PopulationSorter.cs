@@ -11,7 +11,7 @@ namespace EvoMice.Genetic.Util
         /// <typeparam name="TIndividual">Тип индивида</typeparam>
         /// <param name="population">Популяция</param>
         /// <returns>Отсортированная популяция</returns>
-        public static IList<TIndividual> SortPopulation<TChromosome, TIndividual>(IList<TIndividual> population)
+        public static IReadOnlyList<TIndividual> SortPopulation<TChromosome, TIndividual>(IReadOnlyList<TIndividual> population)
             where TIndividual : IIndividual<TChromosome>
         {
             var sortedPopulation = new List<TIndividual>(population.Count);
@@ -31,13 +31,12 @@ namespace EvoMice.Genetic.Util
                 while (population[l].Fitness > mFitness && l < right) l++;
                 while (mFitness > population[r].Fitness && r > left) r--;
 
-                if (l <= r)
-                {
-                    TIndividual tmp = population[l];
-                    population[l] = population[r];
-                    population[r] = tmp;
-                    l++; r--;
-                }
+                if (l > r) continue;
+
+                var tmp = population[l];
+                population[l] = population[r];
+                population[r] = tmp;
+                l++; r--;
             }
 
             if (left < r) QSort<TChromosome, TIndividual>(population, left, r);

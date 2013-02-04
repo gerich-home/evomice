@@ -93,7 +93,7 @@ namespace EvoMice.Genetic
 
             var currentPopulationsChromosomes = PopulationInitializer.Initialize();
 
-            IList<TIndividual> currentPopulation = currentPopulationsChromosomes.Select(
+            IReadOnlyList<TIndividual> currentPopulation = currentPopulationsChromosomes.Select(
                 chromosome => IndividualFactory.CreateIndividual(chromosome, fitnessFunction)
                 ).ToList();
 

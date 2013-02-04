@@ -6,23 +6,23 @@ namespace EvoMice.Neuro
         where TNeuron : INeuron
         where TSynapse : ISynapse
     {
-        protected List<TNeuron> neurons;
-        protected List<TSynapse> synapses;
+        protected IReadOnlyList<TNeuron> neurons;
+        protected IReadOnlyList<TSynapse> synapses;
 
-        public Network()
+        public Network(IReadOnlyList<TNeuron> neurons, IReadOnlyList<TSynapse> synapses)
         {
-            neurons = new List<TNeuron>();
-            synapses = new List<TSynapse>();
+            this.neurons = neurons;
+            this.synapses = synapses;
         }
 
         #region INetwork<TNeuron,TSynapse> Members
 
-        public IList<TNeuron> Neurons
+        public IReadOnlyList<TNeuron> Neurons
         {
             get { return neurons; }
         }
 
-        public IList<TSynapse> Synapses
+        public IReadOnlyList<TSynapse> Synapses
         {
             get { return synapses; }
         }

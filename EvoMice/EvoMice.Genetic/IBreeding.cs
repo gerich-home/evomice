@@ -8,7 +8,7 @@ namespace EvoMice.Genetic
     /// <typeparam name="TChromosome">Тип хромосомы индивида</typeparam>
     /// <typeparam name="TIndividual">Тип индивида</typeparam>
     /// <typeparam name="TParentsPair">Тип родительской пары</typeparam>
-    public interface IBreeding<TChromosome, TIndividual, TParentsPair>
+    public interface IBreeding<TChromosome, in TIndividual, out TParentsPair>
         where TIndividual : IIndividual<TChromosome>
         where TParentsPair : IParentsPair<TChromosome, TIndividual>
     {
@@ -17,6 +17,6 @@ namespace EvoMice.Genetic
         /// </summary>
         /// <param name="population">Текущее поколение</param>
         /// <returns>Образованные родительские пары</returns>  
-        IList<TParentsPair> Select(IList<TIndividual> population);
+        IReadOnlyList<TParentsPair> Select(IReadOnlyList<TIndividual> population);
     }
 }

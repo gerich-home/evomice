@@ -27,7 +27,7 @@ namespace EvoMice.Genetic.ContinueCondition
 
         #region IContinueCondition<TChromosome,TIndividual> Members
 
-        bool IContinueCondition<TChromosome, TIndividual>.ShouldContinue(IList<TIndividual> population, int generation)
+        bool IContinueCondition<TChromosome, TIndividual>.ShouldContinue(IReadOnlyList<TIndividual> population, int generation)
         {
             return generation < MaxGenerations;
         }

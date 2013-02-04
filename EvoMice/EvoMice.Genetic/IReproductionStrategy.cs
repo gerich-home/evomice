@@ -16,6 +16,6 @@ namespace EvoMice.Genetic
         /// <param name="population">Текущее поколение</param>
         /// <param name="reproductionGroup">Репродукционное множество</param>
         /// <returns>Новое поколение</returns>
-        IList<TIndividual> NextGeneration(IList<TIndividual> population, IList<TIndividual> reproductionGroup);
+        IReadOnlyList<TIndividual> NextGeneration(IReadOnlyList<TIndividual> population, IReadOnlyList<TIndividual> reproductionGroup);
     }
 }

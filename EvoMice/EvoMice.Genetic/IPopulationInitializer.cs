@@ -6,12 +6,12 @@ namespace EvoMice.Genetic
     /// Инициализатор первого поколения
     /// </summary>
     /// <typeparam name="TChromosome">Тип хромосомы индивида</typeparam>
-    public interface IPopulationInitializer<TChromosome>
+    public interface IPopulationInitializer<out TChromosome>
     {
         /// <summary>
         /// Сгенерировать первое поколение популяции
         /// </summary>
         /// <returns>Генофонд первого поколения</returns>
-        IList<TChromosome> Initialize();
+        IReadOnlyList<TChromosome> Initialize();
     }
 }

@@ -36,7 +36,7 @@ namespace EvoMice.Genetic.Selection
         /// <param name="reproductionGroup">Репродукционное множество</param>
         /// <param name="count">Число необходимых индивидов</param>
         /// <returns>Отобранные особи</returns>
-        protected override IList<TIndividual> DoSelection(IList<TIndividual> reproductionGroup, int count)
+        protected override IReadOnlyList<TIndividual> DoSelection(IReadOnlyList<TIndividual> reproductionGroup, int count)
         {
             int rCount = reproductionGroup.Count;
             var ranks = new List<double>(rCount);

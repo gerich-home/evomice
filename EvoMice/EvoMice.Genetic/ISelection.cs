@@ -17,6 +17,6 @@ namespace EvoMice.Genetic
         /// <param name="count">Число необходимых индивидов</param>
         /// <returns>Отобранные особи</returns>
         /// <remarks>Число отобранных особей может не совпадать с count, если невозможно отобрать особей по данной схеме селекции</remarks>
-        IList<TIndividual> Select(IList<TIndividual> reproductionGroup, int count);
+        IReadOnlyList<TIndividual> Select(IReadOnlyList<TIndividual> reproductionGroup, int count);
     }
 }

@@ -18,6 +18,6 @@ namespace EvoMice.Genetic.Selection
         /// <param name="count">Число необходимых индивидов</param>
         /// <returns>Отобранные особи</returns>
         /// <remarks>Ранги рассматриваются как относительные величины</remarks>
-        IList<TIndividual> Select(IList<TIndividual> reproductionGroup, IList<double> ranks, int count);
+        IReadOnlyList<TIndividual> Select(IReadOnlyList<TIndividual> reproductionGroup, IReadOnlyList<double> ranks, int count);
     }
 }

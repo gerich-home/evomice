@@ -34,11 +34,11 @@ namespace EvoMice.Genetic
         /// <param name="reproductionGroup">Репродукционное множество</param>
         /// <param name="count">Число необходимых индивидов</param>
         /// <returns>Отобранные особи</returns>
-        protected abstract IList<TIndividual> DoSelection(IList<TIndividual> reproductionGroup, int count);
+        protected abstract IReadOnlyList<TIndividual> DoSelection(IReadOnlyList<TIndividual> reproductionGroup, int count);
 
         #region ISelection<TChromosome,TIndividual> Members
-        
-        IList<TIndividual> ISelection<TChromosome, TIndividual>.Select(IList<TIndividual> reproductionGroup, int count)
+
+        IReadOnlyList<TIndividual> ISelection<TChromosome, TIndividual>.Select(IReadOnlyList<TIndividual> reproductionGroup, int count)
         {
             if (count == 0)
                 return new List<TIndividual>(0);

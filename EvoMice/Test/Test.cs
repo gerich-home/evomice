@@ -103,25 +103,16 @@ namespace EvoMice
 
         static bool testNeuroStruct()
         {
-            INetwork<LinearNeuron, ClampedSynapse> network = new Network<LinearNeuron, ClampedSynapse>();
 
             LinearNeuron n1 = new LinearNeuron(1),
                          n2 = new LinearNeuron(1),
                          n3 = new LinearNeuron(1);
 
-            IList<LinearNeuron> neurons = network.Neurons;
-            neurons.Add(n1);
-            neurons.Add(n2);
-            neurons.Add(n3);
-
-            IList<ClampedSynapse> synapses = network.Synapses;
             ClampedSynapse s1 = new ClampedSynapse(n1, n2, 1),
                            s2 = new ClampedSynapse(n2, n3, 1),
                            s3 = new ClampedSynapse(n3, n1, 2);
-            synapses.Add(s1);
-            synapses.Add(s2);
-            synapses.Add(s3);
 
+            INetwork<LinearNeuron, ClampedSynapse> network = new Network<LinearNeuron, ClampedSynapse>(new List<LinearNeuron> { n1, n2, n3 }, new List<ClampedSynapse> { s1, s2, s3 });
             (n1 as INeuron).AddSignal(1);
 
             network.Update(); if (n1.Activation != 1 || n2.Activation != 0 || n3.Activation != 0) return false;

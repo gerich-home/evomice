@@ -29,12 +29,12 @@ namespace EvoMice.Genetic.VectorChromosome.Crossover
         /// </summary>
         /// <param name="parentsPair">Родительская пара</param>
         /// <returns>Потомки</returns>
-        protected override IList<TChromosome> DoCrossover(TParentsPair parentsPair)
+        protected override IReadOnlyList<TChromosome> DoCrossover(TParentsPair parentsPair)
         {
-            TChromosome motherChromosome = parentsPair.Mother.Chromosome;
-            TChromosome fatherChromosome = parentsPair.Father.Chromosome;
+            var motherChromosome = parentsPair.Mother.Chromosome;
+            var fatherChromosome = parentsPair.Father.Chromosome;
 
-            TChromosome child = motherChromosome.Copy();
+            var child = motherChromosome.Copy();
 
             for (int i = 0; i < motherChromosome.Length; i++)
                 if (Util.Random.NextDouble() <= 0.5)

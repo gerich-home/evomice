@@ -11,7 +11,7 @@ namespace EvoMice.Genetic.Selection.Selector
     {
         #region ISelector<TChromosome,TIndividual> Members
 
-        IList<TIndividual> ISelector<TChromosome, TIndividual>.Select(IList<TIndividual> reproductionGroup, IList<double> ranks, int count)
+        IReadOnlyList<TIndividual> ISelector<TChromosome, TIndividual>.Select(IReadOnlyList<TIndividual> reproductionGroup, IReadOnlyList<double> ranks, int count)
         {
             var selected = new List<TIndividual>(count);
 

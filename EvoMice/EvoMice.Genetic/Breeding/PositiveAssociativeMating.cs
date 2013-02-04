@@ -48,9 +48,9 @@ namespace EvoMice.Genetic.Breeding
 
         #region IBreeding<TChromosome,TIndividual,TParentsPair> Members
 
-        IList<TParentsPair> IBreeding<TChromosome, TIndividual, TParentsPair>.Select(IList<TIndividual> population)
+        IReadOnlyList<TParentsPair> IBreeding<TChromosome, TIndividual, TParentsPair>.Select(IReadOnlyList<TIndividual> population)
         {
-            IList<TIndividual> sortedPopulation =
+            var sortedPopulation =
                 Util.PopulationSorter.SortPopulation<TChromosome, TIndividual>(
                     population
                 );
@@ -61,7 +61,7 @@ namespace EvoMice.Genetic.Breeding
             for (int i = 0; i < PairCount; i++)
             {
                 int firstInd = Util.Random.Next(pCount);
-                TIndividual first = sortedPopulation[firstInd];
+                var first = sortedPopulation[firstInd];
 
                 int minInd;
                 for (minInd = firstInd - 1; minInd >= 0; minInd--)
@@ -83,7 +83,7 @@ namespace EvoMice.Genetic.Breeding
                 if (secondInd >= firstInd)
                     secondInd++;
 
-                TIndividual second = population[secondInd];
+                var second = population[secondInd];
 
                 pairs.Add(ParentsPairFactory.CreatePair(first, second));
             }

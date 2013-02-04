@@ -37,7 +37,7 @@ namespace EvoMice.Genetic.ReproductionStrategy
 
         #region IReproductionStrategy<TChromosome,TIndividual> Members
 
-        IList<TIndividual> IReproductionStrategy<TChromosome, TIndividual>.NextGeneration(IList<TIndividual> population, IList<TIndividual> reproductionGroup)
+        IReadOnlyList<TIndividual> IReproductionStrategy<TChromosome, TIndividual>.NextGeneration(IReadOnlyList<TIndividual> population, IReadOnlyList<TIndividual> reproductionGroup)
         {
             var newPopulation = new List<TIndividual>(population.Count);
 

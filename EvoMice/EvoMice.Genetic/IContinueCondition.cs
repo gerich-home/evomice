@@ -7,7 +7,7 @@ namespace EvoMice.Genetic
     /// </summary>
     /// <typeparam name="TChromosome">Тип хромосомы индивида</typeparam>
     /// <typeparam name="TIndividual">Тип индивида</typeparam>
-    public interface IContinueCondition<out TChromosome, TIndividual>
+    public interface IContinueCondition<out TChromosome, in TIndividual>
         where TIndividual : IIndividual<TChromosome>
     {
         /// <summary>
@@ -16,6 +16,6 @@ namespace EvoMice.Genetic
         /// <param name="population">Текущее поколение</param>
         /// <param name="generation">Номер текущего поколения</param>
         /// <returns>true, если стоит продолжать</returns>
-        bool ShouldContinue(IList<TIndividual> population, int generation);
+        bool ShouldContinue(IReadOnlyList<TIndividual> population, int generation);
     }
 }

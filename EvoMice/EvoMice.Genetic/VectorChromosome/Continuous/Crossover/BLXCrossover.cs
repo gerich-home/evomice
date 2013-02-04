@@ -34,13 +34,13 @@ namespace EvoMice.Genetic.VectorChromosome.Continuous.Crossover
         /// </summary>
         /// <param name="parentsPair">Родительская пара</param>
         /// <returns>Потомки</returns>
-        protected override IList<ContinuousChromosome> DoCrossover(TParentsPair parentsPair)
+        protected override IReadOnlyList<ContinuousChromosome> DoCrossover(TParentsPair parentsPair)
         {
-            ContinuousChromosome motherChromosome = parentsPair.Mother.Chromosome;
-            ContinuousChromosome fatherChromosome = parentsPair.Father.Chromosome;
+            var motherChromosome = parentsPair.Mother.Chromosome;
+            var fatherChromosome = parentsPair.Father.Chromosome;
 
             int point = Util.Random.Next(motherChromosome.Length - 1);
-            ContinuousChromosome child = motherChromosome.Copy();
+            var child = motherChromosome.Copy();
 
             double c = 1 + 2 * Alpha;
             for (int i = 0; i < child.Length; i++)

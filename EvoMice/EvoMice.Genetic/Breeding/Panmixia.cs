@@ -38,7 +38,7 @@ namespace EvoMice.Genetic.Breeding
 
         #region IBreeding<TChromosome,TIndividual,TParentsPair> Members
 
-        IList<TParentsPair> IBreeding<TChromosome, TIndividual, TParentsPair>.Select(IList<TIndividual> population)
+        IReadOnlyList<TParentsPair> IBreeding<TChromosome, TIndividual, TParentsPair>.Select(IReadOnlyList<TIndividual> population)
         {
             int pCount = population.Count;
             var pairs = new List<TParentsPair>(PairCount);

@@ -79,7 +79,7 @@ namespace EvoMice.Genetic.VectorChromosome.Continuous
 
         #region IPopulationInitializer<ContinuousChromosome> Members
 
-        IList<ContinuousChromosome> IPopulationInitializer<ContinuousChromosome>.Initialize()
+        IReadOnlyList<ContinuousChromosome> IPopulationInitializer<ContinuousChromosome>.Initialize()
         {
             var population = new List<ContinuousChromosome>(PopulationSize);
 

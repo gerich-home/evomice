@@ -17,6 +17,6 @@ namespace EvoMice.Genetic
         /// </summary>
         /// <param name="parentsPair">Родительская пара</param>
         /// <returns>Потомки</returns>
-        IList<TChromosome> Crossover(TParentsPair parentsPair);
+        IReadOnlyList<TChromosome> Crossover(TParentsPair parentsPair);
     }
 }
