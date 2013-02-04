@@ -26,7 +26,7 @@ namespace EvoMice.Genetic.Selection
         public RankSelection(double r, TSelector selector) :
             base(selector)
         {
-            this.R = r;
+            R = r;
         }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace EvoMice.Genetic.Selection
         protected override IList<TIndividual> DoSelection(IList<TIndividual> reproductionGroup, int count)
         {
             int rCount = reproductionGroup.Count;
-            List<double> ranks = new List<double>(rCount);
+            var ranks = new List<double>(rCount);
 
             IList<TIndividual> sortedPopulation = Util.PopulationSorter.SortPopulation<TChromosome, TIndividual>(reproductionGroup);
 

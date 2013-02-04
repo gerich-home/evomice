@@ -32,8 +32,6 @@ namespace EvoMice.Neuro.Synapses
         /// <param name="outNeuron">Нейрон, посылающий сигнал</param>
         /// <param name="inNeuron">Нейрон, принимающий сигнал</param>
         /// <param name="weight">Вес синапса</param>
-        /// <param name="lowBound">Минимальное принимаемое значение</param>
-        /// <param name="highBound">Максимальное принимаемое значение</param>
         public ClampedSynapse(INeuron outNeuron, INeuron inNeuron, double weight)
             : this(outNeuron, inNeuron, weight, double.NegativeInfinity, double.PositiveInfinity)
         {

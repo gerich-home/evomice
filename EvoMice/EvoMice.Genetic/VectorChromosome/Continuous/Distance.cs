@@ -22,10 +22,9 @@ namespace EvoMice.Genetic.VectorChromosome.Continuous
         public double Distance(TChromosome first, TChromosome second)
         {
             double s = 0;
-            double d;
             for (int i = 0; i < first.Length; i++)
             {
-                d = first[i].Value - second[i].Value;
+                double d = first[i].Value - second[i].Value;
                 s += d * d;
             }
             return Math.Sqrt(s);

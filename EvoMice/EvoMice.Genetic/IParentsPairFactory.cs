@@ -7,7 +7,7 @@ namespace EvoMice.Genetic
     /// <typeparam name="TChromosome">Тип хромосомы индивида</typeparam>
     /// <typeparam name="TIndividual">Тип индивида</typeparam>
     /// <typeparam name="TParentsPair">Тип родительской пары</typeparam>
-    public interface IParentsPairFactory<TChromosome, TIndividual, TParentsPair>
+    public interface IParentsPairFactory<TChromosome, in TIndividual, out TParentsPair>
         where TIndividual : IIndividual<TChromosome>
         where TParentsPair : IParentsPair<TChromosome, TIndividual>
     {

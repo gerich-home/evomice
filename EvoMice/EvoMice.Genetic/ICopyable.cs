@@ -5,7 +5,7 @@ namespace EvoMice.Genetic
     /// Копируемый тип к данному типу
     /// </summary>
     /// <typeparam name="T">Тип, который имеют копии</typeparam>
-    public interface ICopyable<T>
+    public interface ICopyable<out T>
     {
         /// <summary>
         /// Создать копию данного объекта

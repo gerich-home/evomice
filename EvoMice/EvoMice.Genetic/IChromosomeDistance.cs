@@ -5,7 +5,7 @@ namespace EvoMice.Genetic
     /// Измеритель расстояния между хромосомами
     /// </summary>
     /// <typeparam name="TChromosome">Тип хромосомы</typeparam>
-    public interface IChromosomeDistance<TChromosome>
+    public interface IChromosomeDistance<in TChromosome>
     {
         /// <summary>
         /// Расстояние между двумя хромосомами

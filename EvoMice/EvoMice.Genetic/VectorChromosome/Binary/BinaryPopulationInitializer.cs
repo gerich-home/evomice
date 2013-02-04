@@ -33,7 +33,7 @@ namespace EvoMice.Genetic.VectorChromosome.Binary
 
         IList<BinaryChromosome> IPopulationInitializer<BinaryChromosome>.Initialize()
         {
-            List<BinaryChromosome> population = new List<BinaryChromosome>(PopulationSize);
+            var population = new List<BinaryChromosome>(PopulationSize);
 
             for (int i = 0; i < PopulationSize; i++)
                 population.Add(new BinaryChromosome(ChromosomeLength));

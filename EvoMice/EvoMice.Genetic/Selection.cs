@@ -23,7 +23,7 @@ namespace EvoMice.Genetic
         /// Селекция
         /// </summary>
         /// <param name="selector">Алгоритм отбора особей</param>
-        public Selection(TSelector selector)
+        protected Selection(TSelector selector)
         {
             Selector = selector;
         }
@@ -42,8 +42,8 @@ namespace EvoMice.Genetic
         {
             if (count == 0)
                 return new List<TIndividual>(0);
-            else
-                return DoSelection(reproductionGroup, count);
+            
+            return DoSelection(reproductionGroup, count);
         }
 
         #endregion

@@ -13,11 +13,11 @@ namespace EvoMice.Genetic.Selection.Selector
 
         IList<TIndividual> ISelector<TChromosome, TIndividual>.Select(IList<TIndividual> reproductionGroup, IList<double> ranks, int count)
         {
-            List<TIndividual> selected = new List<TIndividual>(count);
+            var selected = new List<TIndividual>(count);
 
             int rCount = reproductionGroup.Count;
 
-            double[] probability = new double[rCount];
+            var probability = new double[rCount];
 
             double multiplier = 0;
             for (int i = 0; i < rCount; i++)

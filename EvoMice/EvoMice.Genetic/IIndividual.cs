@@ -5,7 +5,7 @@ namespace EvoMice.Genetic
     /// Оцененная особь генетического алгоритма
     /// </summary>
     /// <typeparam name="TChromosome">Тип хромосомы индивида</typeparam>
-    public interface IIndividual<TChromosome>
+    public interface IIndividual<out TChromosome>
     {
         /// <summary>
         /// Значение приспособленности

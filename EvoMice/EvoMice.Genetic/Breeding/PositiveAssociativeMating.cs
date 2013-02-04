@@ -56,21 +56,19 @@ namespace EvoMice.Genetic.Breeding
                 );
 
             int pCount = population.Count;
-            List<TParentsPair> pairs =
-                new List<TParentsPair>(PairCount);
-
-            int minInd;
-            int maxInd;
+            var pairs = new List<TParentsPair>(PairCount);
 
             for (int i = 0; i < PairCount; i++)
             {
                 int firstInd = Util.Random.Next(pCount);
                 TIndividual first = sortedPopulation[firstInd];
 
+                int minInd;
                 for (minInd = firstInd - 1; minInd >= 0; minInd--)
                     if ((sortedPopulation[minInd].Fitness - first.Fitness) > MaxDelta)
                         break;
 
+                int maxInd;
                 for (maxInd = firstInd + 1; maxInd < pCount; maxInd++)
                     if ((first.Fitness - sortedPopulation[maxInd].Fitness) > MaxDelta)
                         break;

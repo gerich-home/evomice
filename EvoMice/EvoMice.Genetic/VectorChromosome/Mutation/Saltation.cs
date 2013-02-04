@@ -34,16 +34,15 @@ namespace EvoMice.Genetic.VectorChromosome.Mutation
         /// <returns>Хромосома мутанта</returns>
         protected override TChromosome DoMutation(TChromosome chromosome)
         {
-            TChromosome mutant = chromosome.Copy();
+            var mutant = chromosome.Copy();
 
-            int[] remained = new int[chromosome.Length];
+            var remained = new int[chromosome.Length];
             for (int i = 0; i < chromosome.Length; i++)
                 remained[i] = i;
 
-            int mutationPosition;
             for (int i = 0; i < Count; i++)
             {
-                mutationPosition = Util.Random.Next(chromosome.Length - i);
+                int mutationPosition = Util.Random.Next(chromosome.Length - i);
                 mutant[remained[mutationPosition]] = mutant[remained[mutationPosition]].Mutate();
                 remained[mutationPosition] = remained[chromosome.Length - i - 1];
             }

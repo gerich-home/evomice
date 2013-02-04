@@ -29,9 +29,9 @@ namespace EvoMice.Neuro
 
         void INetwork<TNeuron, TSynapse>.Update()
         {
-            foreach (ISynapse synapse in synapses)
+            foreach (var synapse in synapses)
                 synapse.Update();
-            foreach (INeuron neuron in neurons)
+            foreach (var neuron in neurons)
                 neuron.Update();
         }
 

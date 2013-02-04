@@ -40,10 +40,7 @@ namespace EvoMice.Genetic.VectorChromosome.Crossover
                 if (Util.Random.NextDouble() <= 0.5)
                     child[i] = fatherChromosome[i].Copy();
 
-            List<TChromosome> result = new List<TChromosome>(1);
-            result.Add(child);
-
-            return result;
+            return new List<TChromosome> { child };
         }
     }
 }

@@ -41,7 +41,7 @@ namespace EvoMice.Genetic.Breeding
         IList<TParentsPair> IBreeding<TChromosome, TIndividual, TParentsPair>.Select(IList<TIndividual> population)
         {
             int pCount = population.Count;
-            List<TParentsPair> pairs = new List<TParentsPair>(PairCount);
+            var pairs = new List<TParentsPair>(PairCount);
 
             for (int i = 0; i < PairCount; i++)
             {

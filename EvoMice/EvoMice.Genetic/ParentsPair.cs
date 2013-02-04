@@ -5,6 +5,7 @@ namespace EvoMice.Genetic
     /// Родительская пара
     /// </summary>
     /// <typeparam name="TChromosome">Тип хромосомы индивида</typeparam>
+    /// <typeparam name="TIndividual"></typeparam>
     public class ParentsPair<TChromosome, TIndividual> : IParentsPair<TChromosome, TIndividual>
         where TIndividual : IIndividual<TChromosome>
     {

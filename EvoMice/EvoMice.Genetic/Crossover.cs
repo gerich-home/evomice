@@ -22,7 +22,7 @@ namespace EvoMice.Genetic
         /// Вероятностный кроссовер
         /// </summary>
         /// <param name="probability">Вероятность кроссовера</param>
-        public Crossover(double probability)
+        protected Crossover(double probability)
         {
             Probability = probability;
         }
@@ -41,8 +41,8 @@ namespace EvoMice.Genetic
         {
             if (Util.Random.NextDouble() <= Probability)
                 return DoCrossover(parentsPair);
-            else
-                return new List<TChromosome>();
+            
+            return new List<TChromosome>();
         }
 
         #endregion

@@ -44,11 +44,7 @@ namespace EvoMice.Genetic.VectorChromosome.Crossover
                 child2[i] = motherChromosome[i].Copy();
             }
 
-            List<TChromosome> result = new List<TChromosome>(2);
-            result.Add(child1);
-            result.Add(child2);
-
-            return result;
+            return new List<TChromosome> {child1, child2};
         }
     }
 }

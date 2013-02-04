@@ -34,7 +34,7 @@ namespace EvoMice.Neuro.Synapses
         /// <param name="inNeuron">Нейрон, принимающий сигнал</param>
         /// <param name="lowBound">Минимальное принимаемое значение</param>
         /// <param name="highBound">Максимальное принимаемое значение</param>
-        public BaseSynapse(INeuron outNeuron, INeuron inNeuron, double lowBound, double highBound)
+        protected BaseSynapse(INeuron outNeuron, INeuron inNeuron, double lowBound, double highBound)
         {
             this.outNeuron = outNeuron;
             this.inNeuron = inNeuron;

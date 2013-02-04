@@ -38,7 +38,7 @@ namespace EvoMice.Neuro.Neurons
         /// <param name="bias">Начальное возбужение нейрона</param>
         /// <param name="lowBound">Минимальное принимаемое значение</param>
         /// <param name="highBound">Максимальное принимаемое значение</param>
-        public BaseNeuron(double bias, double lowBound, double highBound)
+        protected BaseNeuron(double bias, double lowBound, double highBound)
         {
             this.bias = bias;
             this.lowBound = lowBound;

@@ -15,7 +15,8 @@ namespace EvoMice.Genetic
         /// <summary>
         /// Оцененная особь генетического алгоритма
         /// </summary>
-        /// <param name="individual">Неоцененная особь</param>
+        /// <param name="chromosome">Хромосома неоцененной особи</param>
+        /// <param name="fitnessFunction">Функция приспособленности, используемая для оценки хромосомы</param>
         /// <remarks>Оценивает особь, создавая новый объект Individual</remarks>
         public Individual(
             TChromosome chromosome,

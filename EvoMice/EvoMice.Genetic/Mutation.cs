@@ -17,7 +17,7 @@ namespace EvoMice.Genetic
         /// Мутация
         /// </summary>
         /// <param name="probability">Вероятность мутации</param>
-        public Mutation(double probability)
+        protected Mutation(double probability)
         {
             Probability = probability;
         }
@@ -35,8 +35,8 @@ namespace EvoMice.Genetic
         {
             if (Util.Random.NextDouble() <= Probability)
                 return DoMutation(chromosome);
-            else
-                return chromosome;
+            
+            return chromosome;
         }
 
         #endregion

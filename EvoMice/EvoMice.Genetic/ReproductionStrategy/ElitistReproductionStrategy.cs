@@ -39,11 +39,11 @@ namespace EvoMice.Genetic.ReproductionStrategy
 
         IList<TIndividual> IReproductionStrategy<TChromosome, TIndividual>.NextGeneration(IList<TIndividual> population, IList<TIndividual> reproductionGroup)
         {
-            List<TIndividual> newPopulation = new List<TIndividual>(population.Count);
+            var newPopulation = new List<TIndividual>(population.Count);
 
             if (reproductionGroup.Count > 0)
             {
-                IList<TIndividual> sortedPopulation = Util.PopulationSorter.SortPopulation<TChromosome, TIndividual>(population);
+                var sortedPopulation = Util.PopulationSorter.SortPopulation<TChromosome, TIndividual>(population);
 
                 newPopulation.Add(sortedPopulation[0]);
 

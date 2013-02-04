@@ -70,8 +70,8 @@ namespace EvoMice.Genetic.VectorChromosome.Continuous
             PopulationSize = populationSize;
             ChromosomeLength = chromosomeLength;
 
-            lowBounds = new double[ChromosomeLength];
-            highBounds = new double[ChromosomeLength];
+            LowBounds = new double[ChromosomeLength];
+            HighBounds = new double[ChromosomeLength];
 
             lowBounds.CopyTo(LowBounds, 0);
             highBounds.CopyTo(HighBounds, 0);
@@ -81,7 +81,7 @@ namespace EvoMice.Genetic.VectorChromosome.Continuous
 
         IList<ContinuousChromosome> IPopulationInitializer<ContinuousChromosome>.Initialize()
         {
-            List<ContinuousChromosome> population = new List<ContinuousChromosome>(PopulationSize);
+            var population = new List<ContinuousChromosome>(PopulationSize);
 
             for (int i = 0; i < PopulationSize; i++)
                 population.Add(new ContinuousChromosome(ChromosomeLength, LowBounds, HighBounds));

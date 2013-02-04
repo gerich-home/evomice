@@ -6,7 +6,7 @@ namespace EvoMice.Genetic
     /// </summary>
     /// <typeparam name="TChromosome">Тип хромосомы индивида</typeparam>
     /// <typeparam name="TIndividual">Тип индивида</typeparam>
-    public interface IParentsPair<TChromosome, TIndividual>
+    public interface IParentsPair<TChromosome, out TIndividual>
         where TIndividual : IIndividual<TChromosome>
     {
         /// <summary>

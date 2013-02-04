@@ -14,8 +14,7 @@ namespace EvoMice.Genetic.Util
         public static IList<TIndividual> SortPopulation<TChromosome, TIndividual>(IList<TIndividual> population)
             where TIndividual : IIndividual<TChromosome>
         {
-
-            List<TIndividual> sortedPopulation = new List<TIndividual>(population.Count);
+            var sortedPopulation = new List<TIndividual>(population.Count);
             sortedPopulation.AddRange(population);
             QSort<TChromosome, TIndividual>(sortedPopulation, 0, population.Count - 1);
             return sortedPopulation;

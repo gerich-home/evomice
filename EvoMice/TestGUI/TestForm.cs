@@ -14,20 +14,13 @@ using EvoMice.Genetic.VectorChromosome.Continuous.Mutation;
 
 namespace TestGUI
 {
-    using GA = GeneticAlgorithm<ContinuousChromosome,
-                Individual<ContinuousChromosome>,
-                ParentsPair<ContinuousChromosome, Individual<ContinuousChromosome>>,
-                IFitnessFunction<ContinuousChromosome>
-                >;
-
-
     public partial class TestForm : Form
     {
         public object locker = new object();
 
         private class TestFunc : IFitnessFunction<ContinuousChromosome>
         {
-            public double[] Offset { get; protected set; }
+            private double[] Offset { get; set; }
 
             public TestFunc(params double[] offset)
             {
@@ -82,7 +75,7 @@ namespace TestGUI
         private class GUIIndividualFactory :
             IIndividualFactory<ContinuousChromosome, Individual<ContinuousChromosome>, IFitnessFunction<ContinuousChromosome>>
         {
-            public TestForm TestForm { get; protected set; }
+            private TestForm TestForm { get; set; }
 
             public GUIIndividualFactory(TestForm testForm)
             {
@@ -122,7 +115,12 @@ namespace TestGUI
 
         public void RunGA()
         {
-            GA ga = new GA(
+            var ga = new GeneticAlgorithm<
+                ContinuousChromosome,
+                Individual<ContinuousChromosome>,
+                ParentsPair<ContinuousChromosome, Individual<ContinuousChromosome>>,
+                IFitnessFunction<ContinuousChromosome>
+                >(
                     new ElitistReproductionStrategy<ContinuousChromosome, Individual<ContinuousChromosome>, ISelection<ContinuousChromosome, Individual<ContinuousChromosome>>>
                         (0.2,
                 //new BTournamentSelection<ContinuousChromosome,Individual<ContinuousChromosome>>(4)
@@ -169,7 +167,7 @@ namespace TestGUI
                 progressBar.Value = 0;
                 progressBar.Maximum = runs;
 
-                workerThread = new Thread(new ThreadStart(delegate()
+                workerThread = new Thread(delegate()
                     {
                         try
                         {
@@ -178,22 +176,19 @@ namespace TestGUI
                                 RunGA();
                                 if (i % 50 == 0 || i == runs - 1)
                                     picView.Invoke(new InvokeDelegate(delegate()
-                                    {
-                                        lock (locker)
-                                            picView.Refresh();
-                                    }));
-                                progressBar.Invoke(new InvokeDelegate(delegate()
-                                {
-                                    progressBar.Increment(1);
-                                }));
+                                        {
+                                            lock (locker)
+                                                picView.Refresh();
+                                        }));
+                                progressBar.Invoke(new InvokeDelegate(() => progressBar.Increment(1)));
                             }
                         }
                         catch { }
                         btnStart.Invoke(new InvokeDelegate(delegate()
-                        {
-                            btnStart.Enabled = true;
-                        }));
-                    }));
+                            {
+                                btnStart.Enabled = true;
+                            }));
+                    });
 
                 picView.Invoke(new InvokeDelegate(delegate()
                 {

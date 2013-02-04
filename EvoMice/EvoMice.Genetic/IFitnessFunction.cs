@@ -5,7 +5,7 @@ namespace EvoMice.Genetic
     /// Функция приспособленности
     /// </summary>
     /// <typeparam name="TChromosome">Тип хромосомы индивида</typeparam>
-    public interface IFitnessFunction<TChromosome>
+    public interface IFitnessFunction<in TChromosome>
     {
         /// <summary>
         /// Вычислить приспособленность особи с данной хромосомой

@@ -29,22 +29,19 @@ namespace EvoMice.Genetic.Selection
 
         IList<TIndividual> ISelection<TChromosome, TIndividual>.Select(IList<TIndividual> reproductionGroup, int count)
         {
-            List<TIndividual> selected = new List<TIndividual>(count);
+            var selected = new List<TIndividual>(count);
 
             int rCount = reproductionGroup.Count;
 
-            TIndividual best;
-            TIndividual current;
-
             for (int i = 0; i < count; i++)
             {
-                best = reproductionGroup[Util.Random.Next(rCount)];
+                var best = reproductionGroup[Util.Random.Next(rCount)];
 
                 for (int j = 1; j < Betta; j++)
                 {
-                    current = reproductionGroup[Util.Random.Next(rCount)];
+                    var current = reproductionGroup[Util.Random.Next(rCount)];
                     if (current.Fitness > best.Fitness)
-                        current = best;
+                        best = current;
                 }
 
                 selected.Add(best);

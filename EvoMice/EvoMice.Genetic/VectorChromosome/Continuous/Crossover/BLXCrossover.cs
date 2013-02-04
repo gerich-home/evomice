@@ -50,10 +50,7 @@ namespace EvoMice.Genetic.VectorChromosome.Continuous.Crossover
                 child[i].Value = min + (max - min) * (Util.Random.NextDouble() * c - Alpha);
             }
 
-            List<ContinuousChromosome> result = new List<ContinuousChromosome>(1);
-            result.Add(child);
-
-            return result;
+            return new List<ContinuousChromosome> {child};
         }
     }
 }

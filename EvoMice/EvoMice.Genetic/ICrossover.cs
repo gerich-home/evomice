@@ -8,7 +8,7 @@ namespace EvoMice.Genetic
     /// <typeparam name="TChromosome">Тип хромосомы индивида</typeparam>
     /// <typeparam name="TIndividual">Тип индивида</typeparam>
     /// <typeparam name="TParentsPair">Тип родительской пары</typeparam>
-    public interface ICrossover<TChromosome, TIndividual, TParentsPair>
+    public interface ICrossover<TChromosome, TIndividual, in TParentsPair>
         where TIndividual : IIndividual<TChromosome>
         where TParentsPair : IParentsPair<TChromosome, TIndividual>
     {

@@ -40,8 +40,6 @@ namespace EvoMice.Neuro.Synapses
         /// <param name="inNeuron">Нейрон, принимающий сигнал</param>
         /// <param name="weight">Вес синапса</param>
         /// <param name="learningRate">Скорость изменения веса</param>
-        /// <param name="lowBound">Минимальное принимаемое значение</param>
-        /// <param name="highBound">Максимальное принимаемое значение</param>
         public HebbianSynapse(INeuron outNeuron, INeuron inNeuron, double weight, double learningRate)
             : this(outNeuron, inNeuron, weight, learningRate, double.NegativeInfinity, double.PositiveInfinity)
         {

@@ -5,7 +5,7 @@ namespace EvoMice.Genetic
     /// Тип, который можно сравнивать на равенство с другим типом
     /// </summary>
     /// <typeparam name="T">Тип, с которым идёт сравнение</typeparam>
-    public interface IEqualityComparable<T>
+    public interface IEqualityComparable<in T>
     {
         /// <summary>
         /// Сравнивает на равенство объекты

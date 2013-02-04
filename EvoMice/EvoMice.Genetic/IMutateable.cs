@@ -5,7 +5,7 @@ namespace EvoMice.Genetic
     /// Тип, способный к мутации
     /// </summary>
     /// <typeparam name="T">Тип, который имеют мутанты</typeparam>
-    public interface IMutateable<T>
+    public interface IMutateable<out T>
     {
         /// <summary>
         /// Создать мутанта данного объекта

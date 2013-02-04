@@ -3,7 +3,7 @@ namespace EvoMice.Genetic.Util
 {
     public static class Random
     {
-        private static System.Random rnd = new System.Random();
+        private static readonly System.Random rnd = new System.Random();
 
         /// <summary>
         /// Общий генератор случайных чисел

@@ -15,22 +15,16 @@ namespace EvoMice.Genetic.Selection
 
         IList<TIndividual> ISelection<TChromosome, TIndividual>.Select(IList<TIndividual> reproductionGroup, int count)
         {
-            List<TIndividual> selected = new List<TIndividual>(count);
+            var selected = new List<TIndividual>(count);
 
             int rCount = reproductionGroup.Count;
 
-            TIndividual first;
-            TIndividual second;
-
             for (int i = 0; i < count; i++)
             {
-                first = reproductionGroup[Util.Random.Next(rCount)];
-                second = reproductionGroup[Util.Random.Next(rCount)];
+                var first = reproductionGroup[Util.Random.Next(rCount)];
+                var second = reproductionGroup[Util.Random.Next(rCount)];
 
-                if (first.Fitness > second.Fitness)
-                    selected.Add(first);
-                else
-                    selected.Add(second);
+                selected.Add(first.Fitness > second.Fitness ? first : second);
             }
 
             return selected;

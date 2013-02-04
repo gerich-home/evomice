@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace EvoMice.Genetic
 {
@@ -90,53 +91,36 @@ namespace EvoMice.Genetic
         {
             int generation = 0;
 
-            IList<TChromosome> currentPopulationsChromosomes;
-            IList<TIndividual> currentPopulation;
+            var reproductionGroup = new List<TIndividual>();
 
-            IList<TParentsPair> pairs;
+            var currentPopulationsChromosomes = PopulationInitializer.Initialize();
 
-            IList<TChromosome> children;
-
-            TChromosome mutant;
-
-            List<TIndividual> reproductionGroup = new List<TIndividual>();
-
-            currentPopulationsChromosomes = PopulationInitializer.Initialize();
-
-            currentPopulation = new List<TIndividual>();
-            foreach (TChromosome chromosome in currentPopulationsChromosomes)
-                currentPopulation.Add(
-                    IndividualFactory.CreateIndividual(chromosome, fitnessFunction)
-                    );
+            IList<TIndividual> currentPopulation = currentPopulationsChromosomes.Select(
+                chromosome => IndividualFactory.CreateIndividual(chromosome, fitnessFunction)
+                ).ToList();
 
             BestSolution = currentPopulation[0];
 
-            foreach (TIndividual individual in currentPopulation)
+            foreach (var individual in currentPopulation)
                 if (individual.Fitness > BestSolution.Fitness)
                     BestSolution = individual;
 
             while (ContinueCondition.ShouldContinue(currentPopulation, generation))
             {
 
-                pairs = Breeding.Select(currentPopulation);
+                var pairs = Breeding.Select(currentPopulation);
 
                 reproductionGroup.Clear();
 
-                foreach (TParentsPair pair in pairs)
+                foreach (var children in pairs.Select(pair => Crossover.Crossover(pair)))
                 {
-                    children = Crossover.Crossover(pair);
-
-                    foreach (TChromosome chromosome in children)
-                    {
-                        mutant = Mutation.Mutate(chromosome);
-
-                        reproductionGroup.Add(
-                            IndividualFactory.CreateIndividual(mutant, fitnessFunction)
-                            );
-                    }
+                    reproductionGroup.AddRange(
+                        children
+                            .Select(chromosome => Mutation.Mutate(chromosome))
+                            .Select(mutant => IndividualFactory.CreateIndividual(mutant, fitnessFunction)));
                 }
 
-                foreach (TIndividual individual in reproductionGroup)
+                foreach (var individual in reproductionGroup)
                     if (individual.Fitness > BestSolution.Fitness)
                         BestSolution = individual;
 

@@ -29,10 +29,7 @@ namespace EvoMice.Genetic.VectorChromosome.Binary
         /// <param name="value">Значение локуса</param>
         public BinaryLocus(int value)
         {
-            if (value == 0)
-                Value = 0;
-            else
-                Value = 1;
+            Value = value == 0 ? 0 : 1;
         }
 
         #region ICopyable<BinaryLocus> Members
@@ -43,7 +40,7 @@ namespace EvoMice.Genetic.VectorChromosome.Binary
         /// <returns>Копия объекта</returns>
         public BinaryLocus Copy()
         {
-            return new BinaryLocus(this.Value);
+            return new BinaryLocus(Value);
         }
 
         #endregion

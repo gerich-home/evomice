@@ -17,7 +17,7 @@ namespace EvoMice
 {
     class SquaredFunc : IFitnessFunction<ContinuousChromosome>
     {
-        double offset;
+        readonly double offset;
         public SquaredFunc(double offset)
         {
             this.offset = offset;
@@ -52,20 +52,12 @@ namespace EvoMice
         /// <param name="description">Описание</param>
         static void RunTest(TestDelegate test, string description)
         {
-            if (test())
-                Console.WriteLine("{0}:\t пройден", description);
-            else
-                Console.WriteLine("{0}:\t НЕ ПРОЙДЕН", description);
-
+            Console.WriteLine(test() ? "{0}:\t пройден" : "{0}:\t НЕ ПРОЙДЕН", description);
         }
 
         static bool testGeneticClasses()
         {
-            GeneticAlgorithm<ContinuousChromosome,
-                Individual<ContinuousChromosome>,
-                ParentsPair<ContinuousChromosome, Individual<ContinuousChromosome>>,
-                IFitnessFunction<ContinuousChromosome>
-                > ga =
+            var ga =
                 new GeneticAlgorithm<ContinuousChromosome,
                     Individual<ContinuousChromosome>,
                     ParentsPair<ContinuousChromosome, Individual<ContinuousChromosome>>,
@@ -106,7 +98,7 @@ namespace EvoMice
         {
             Console.WriteLine("\tТестируем EvoMice.Genetic");
 
-            RunTest(new TestDelegate(testGeneticClasses), "Классы генетического алгоритма");
+            RunTest(testGeneticClasses, "Классы генетического алгоритма");
 
         }
 
@@ -149,7 +141,7 @@ namespace EvoMice
         {
             Console.WriteLine("\tТестируем EvoMice.Neuro");
 
-            RunTest(new TestDelegate(testNeuroStruct), "Работа нейронной сети");
+            RunTest(testNeuroStruct, "Работа нейронной сети");
 
         }
 

@@ -53,24 +53,18 @@ namespace EvoMice.Genetic.VectorChromosome.Crossover
 
             if (left == right)
                 return new List<TChromosome>();
-            else
+            
+            int point = left + Util.Random.Next(right - left);
+            TChromosome child1 = motherChromosome.Copy();
+            TChromosome child2 = fatherChromosome.Copy();
+
+            for (int i = 0; i <= point; i++)
             {
-                int point = left + Util.Random.Next(right - left);
-                TChromosome child1 = motherChromosome.Copy();
-                TChromosome child2 = fatherChromosome.Copy();
-
-                for (int i = 0; i <= point; i++)
-                {
-                    child1[i] = fatherChromosome[i].Copy();
-                    child2[i] = motherChromosome[i].Copy();
-                }
-
-                List<TChromosome> result = new List<TChromosome>(2);
-                result.Add(child1);
-                result.Add(child2);
-
-                return result;
+                child1[i] = fatherChromosome[i].Copy();
+                child2[i] = motherChromosome[i].Copy();
             }
+
+            return new List<TChromosome> {child1, child2};
         }
     }
 }

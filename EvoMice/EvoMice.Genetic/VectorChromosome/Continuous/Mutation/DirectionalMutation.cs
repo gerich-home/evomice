@@ -29,7 +29,7 @@ namespace EvoMice.Genetic.VectorChromosome.Continuous.Mutation
         {
             TChromosome mutant = chromosome.Copy();
 
-            double[] direction = new double[mutant.Length];
+            var direction = new double[mutant.Length];
             double l = 0;
 
             for (int i = 0; i < mutant.Length; i++)

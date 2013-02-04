@@ -39,7 +39,7 @@ namespace EvoMice.Genetic.Selection
         protected override IList<TIndividual> DoSelection(IList<TIndividual> reproductionGroup, int count)
         {
             int rCount = reproductionGroup.Count;
-            List<double> ranks = new List<double>(rCount);
+            var ranks = new List<double>(rCount);
 
             double a;
             double b;
@@ -57,12 +57,13 @@ namespace EvoMice.Genetic.Selection
 
             if (minFitness == aveFitness || aveFitness == -maxFitness)
             {
-                List<TIndividual> selected = new List<TIndividual>();
+                var selected = new List<TIndividual>();
                 for (int i = 0; i < rCount; i++)
                     selected.Add(reproductionGroup[Util.Random.Next(rCount)]);
                 return selected;
             }
-            else if (minFitness * (c - 1) >= (maxFitness - c * aveFitness))
+            
+            if (minFitness * (c - 1) >= (maxFitness - c * aveFitness))
             {
                 a = (c - 1) * aveFitness / (aveFitness + maxFitness);
                 b = aveFitness * (maxFitness - c * aveFitness) / (aveFitness - minFitness);
