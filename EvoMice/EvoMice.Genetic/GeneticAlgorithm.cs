@@ -78,7 +78,6 @@ namespace EvoMice.Genetic
             Breeding = breeding;
             Crossover = crossover;
             Mutation = mutation;
-            BestSolution = default(TIndividual);
         }
 
         #region IGeneticAlgorithm<TChromosome,TIndividual,TFitnessFunction> Members
@@ -87,7 +86,8 @@ namespace EvoMice.Genetic
         /// Работа генетического алгоритма
         /// </summary>
         /// <param name="fitnessFunction">Функция приспособленности</param>
-        public void Run(TFitnessFunction fitnessFunction)
+        /// <returns>Лучшее решение, найденное генетическим алгоритмом</returns>
+        public TIndividual Run(TFitnessFunction fitnessFunction)
         {
             int generation = 0;
 
@@ -99,11 +99,11 @@ namespace EvoMice.Genetic
                 chromosome => IndividualFactory.CreateIndividual(chromosome, fitnessFunction)
                 ).ToList();
 
-            BestSolution = currentPopulation[0];
+            var bestSolution = currentPopulation[0];
 
             foreach (var individual in currentPopulation)
-                if (individual.Fitness > BestSolution.Fitness)
-                    BestSolution = individual;
+                if (individual.Fitness > bestSolution.Fitness)
+                    bestSolution = individual;
 
             while (ContinueCondition.ShouldContinue(currentPopulation, generation))
             {
@@ -121,8 +121,8 @@ namespace EvoMice.Genetic
                 }
 
                 foreach (var individual in reproductionGroup)
-                    if (individual.Fitness > BestSolution.Fitness)
-                        BestSolution = individual;
+                    if (individual.Fitness > bestSolution.Fitness)
+                        bestSolution = individual;
 
                 currentPopulation = Strategy.NextGeneration(
                     currentPopulation,
@@ -131,12 +131,9 @@ namespace EvoMice.Genetic
 
                 generation++;
             }
-        }
 
-        /// <summary>
-        /// Лучшее решение, найденное генетическим алгоритмом
-        /// </summary>
-        public TIndividual BestSolution { get; protected set; }
+            return bestSolution;
+        }
 
         #endregion
     }

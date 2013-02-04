@@ -147,9 +147,9 @@ namespace TestGUI
                     //    (0.03)
                     );
 
-            ga.Run(new TestFunc(10, 10));
+            var bestSolution = ga.Run(new TestFunc(10, 10));
 
-            DrawChromosome(ga.BestSolution.Chromosome, bestBmp, Color.Red);
+            DrawChromosome(bestSolution.Chromosome, bestBmp, Color.Red);
         }
 
         private delegate void InvokeDelegate();

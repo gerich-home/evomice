@@ -85,12 +85,12 @@ namespace EvoMice
                     );
 
             DateTime t = DateTime.Now;
-            ga.Run(new SquaredFunc(10));
+            var bestSolution = ga.Run(new SquaredFunc(10));
             Console.WriteLine((DateTime.Now - t).TotalMilliseconds);
 
-            Console.WriteLine(ga.BestSolution.Fitness);
-            ga.BestSolution.RecalculateFitness();
-            Console.WriteLine("[{0}, {1}]", ga.BestSolution.Chromosome[0].Value, ga.BestSolution.Chromosome[1].Value);
+            Console.WriteLine(bestSolution.Fitness);
+            bestSolution.RecalculateFitness();
+            Console.WriteLine("[{0}, {1}]", bestSolution.Chromosome[0].Value, bestSolution.Chromosome[1].Value);
             return true;
         }
 

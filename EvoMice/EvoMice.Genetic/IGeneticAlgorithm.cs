@@ -15,11 +15,7 @@ namespace EvoMice.Genetic
         /// Запуск генетического алгоритма
         /// </summary>
         /// <param name="fitnessFunction">Функция приспосбленности</param>
-        void Run(TFitnessFunction fitnessFunction);
-
-        /// <summary>
-        /// Лучшее решение, найденное генетическим алгоритмом
-        /// </summary>
-        TIndividual BestSolution { get; }
+        /// <returns>Лучшее решение, найденное генетическим алгоритмом</returns>
+        TIndividual Run(TFitnessFunction fitnessFunction);
     }
 }
